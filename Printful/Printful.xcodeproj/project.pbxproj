@@ -21,6 +21,8 @@
 		FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669429D245A800EA3AFB /* NetworkManager.swift */; };
 		FAD4669729D2461100EA3AFB /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */; };
 		FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669829D246E400EA3AFB /* ApiError.swift */; };
+		FAD4669C29D24EC400EA3AFB /* Basic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */; };
+		FAD4669E29D24F4F00EA3AFB /* DataContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669D29D24F4F00EA3AFB /* DataContoller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		FAD4669429D245A800EA3AFB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		FAD4669829D246E400EA3AFB /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		FAD4669B29D24EC400EA3AFB /* Basic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Basic.xcdatamodel; sourceTree = "<group>"; };
+		FAD4669D29D24F4F00EA3AFB /* DataContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContoller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +203,8 @@
 		FAD4668629D239AF00EA3AFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */,
+				FAD4669D29D24F4F00EA3AFB /* DataContoller.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -376,9 +382,11 @@
 			files = (
 				FAD4669729D2461100EA3AFB /* ReachabilityManager.swift in Sources */,
 				FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */,
+				FAD4669C29D24EC400EA3AFB /* Basic.xcdatamodeld in Sources */,
 				FAD4669329D2450600EA3AFB /* String+ValidUrl.swift in Sources */,
 				FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */,
 				FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */,
+				FAD4669E29D24F4F00EA3AFB /* DataContoller.swift in Sources */,
 				FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */,
 				FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */,
 				FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */,
@@ -707,6 +715,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FAD4669B29D24EC400EA3AFB /* Basic.xcdatamodel */,
+			);
+			currentVersion = FAD4669B29D24EC400EA3AFB /* Basic.xcdatamodel */;
+			path = Basic.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FAD4664B29D1FF7500EA3AFB /* Project object */;
 }

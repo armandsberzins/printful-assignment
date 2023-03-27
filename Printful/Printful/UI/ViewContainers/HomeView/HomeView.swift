@@ -9,10 +9,24 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
+    @FetchRequest(sortDescriptors: []) var basics: FetchedResults<Basic>
+    @Environment(\.managedObjectContext) var moc
     
     var body: some View {
         VStack {
-            Text(viewModel.mainLableText)
+            List(basics) { basic in
+                Text(basic.title ?? "unknown")
+                
+            }
+            
+            Button("Add") {
+
+                let object = Basic(context: moc)
+                object.title = "Hello CD"
+                try? moc.save()
+
+                // more code to come
+            }
         }
         .padding()
     }
