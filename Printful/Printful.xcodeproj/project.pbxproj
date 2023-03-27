@@ -94,9 +94,12 @@
 		FAD4665529D1FF7500EA3AFB /* Printful */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4668329D2395B00EA3AFB /* Extensions */,
+				FAD4668229D2394900EA3AFB /* Models */,
 				FAD4668029D2377500EA3AFB /* Providers */,
+				FAD4668129D2391B00EA3AFB /* Interactors */,
+				FAD4668429D2398A00EA3AFB /* UI */,
 				FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */,
-				FAD4665829D1FF7500EA3AFB /* HomeView.swift */,
 				FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */,
 				FAD4665C29D1FF7600EA3AFB /* Preview Content */,
 			);
@@ -131,8 +134,85 @@
 		FAD4668029D2377500EA3AFB /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4668629D239AF00EA3AFB /* Repositories */,
+				FAD4668529D239A300EA3AFB /* Managers */,
 			);
 			path = Providers;
+			sourceTree = "<group>";
+		};
+		FAD4668129D2391B00EA3AFB /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactors;
+			sourceTree = "<group>";
+		};
+		FAD4668229D2394900EA3AFB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FAD4668329D2395B00EA3AFB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FAD4668429D2398A00EA3AFB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4668829D23A1300EA3AFB /* ViewContainers */,
+				FAD4668729D23A0400EA3AFB /* ViewComponents */,
+				FAD4668A29D23A9300EA3AFB /* Root */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		FAD4668529D239A300EA3AFB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		FAD4668629D239AF00EA3AFB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		FAD4668729D23A0400EA3AFB /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		FAD4668829D23A1300EA3AFB /* ViewContainers */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4668929D23A2D00EA3AFB /* HomeView */,
+			);
+			path = ViewContainers;
+			sourceTree = "<group>";
+		};
+		FAD4668929D23A2D00EA3AFB /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4665829D1FF7500EA3AFB /* HomeView.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		FAD4668A29D23A9300EA3AFB /* Root */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
