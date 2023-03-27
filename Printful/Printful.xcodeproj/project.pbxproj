@@ -17,6 +17,10 @@
 		FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668B29D2413600EA3AFB /* RootView.swift */; };
 		FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668D29D2415C00EA3AFB /* TabController.swift */; };
 		FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668F29D2427300EA3AFB /* HomeViewModel.swift */; };
+		FAD4669329D2450600EA3AFB /* String+ValidUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669229D2450600EA3AFB /* String+ValidUrl.swift */; };
+		FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669429D245A800EA3AFB /* NetworkManager.swift */; };
+		FAD4669729D2461100EA3AFB /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */; };
+		FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669829D246E400EA3AFB /* ApiError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +54,10 @@
 		FAD4668B29D2413600EA3AFB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		FAD4668D29D2415C00EA3AFB /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		FAD4668F29D2427300EA3AFB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FAD4669229D2450600EA3AFB /* String+ValidUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ValidUrl.swift"; sourceTree = "<group>"; };
+		FAD4669429D245A800EA3AFB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
+		FAD4669829D246E400EA3AFB /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +164,7 @@
 		FAD4668229D2394900EA3AFB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4669829D246E400EA3AFB /* ApiError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -163,6 +172,7 @@
 		FAD4668329D2395B00EA3AFB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4669129D2446B00EA3AFB /* String */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -180,6 +190,8 @@
 		FAD4668529D239A300EA3AFB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4669429D245A800EA3AFB /* NetworkManager.swift */,
+				FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -222,6 +234,14 @@
 				FAD4668D29D2415C00EA3AFB /* TabController.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		FAD4669129D2446B00EA3AFB /* String */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4669229D2450600EA3AFB /* String+ValidUrl.swift */,
+			);
+			path = String;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,8 +374,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD4669729D2461100EA3AFB /* ReachabilityManager.swift in Sources */,
 				FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */,
+				FAD4669329D2450600EA3AFB /* String+ValidUrl.swift in Sources */,
 				FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */,
+				FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */,
+				FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */,
 				FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */,
 				FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */,
 				FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */,
