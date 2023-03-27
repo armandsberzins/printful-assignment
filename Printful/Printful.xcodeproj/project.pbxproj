@@ -16,6 +16,7 @@
 		FAD4667429D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4667329D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift */; };
 		FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668B29D2413600EA3AFB /* RootView.swift */; };
 		FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668D29D2415C00EA3AFB /* TabController.swift */; };
+		FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668F29D2427300EA3AFB /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		FAD4667329D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FAD4668B29D2413600EA3AFB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		FAD4668D29D2415C00EA3AFB /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
+		FAD4668F29D2427300EA3AFB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD4665829D1FF7500EA3AFB /* HomeView.swift */,
+				FAD4668F29D2427300EA3AFB /* HomeViewModel.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */,
 				FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */,
 				FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */,
+				FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */,
 				FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
