@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */; };
-		FAD4665929D1FF7500EA3AFB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665829D1FF7500EA3AFB /* ContentView.swift */; };
+		FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665829D1FF7500EA3AFB /* HomeView.swift */; };
 		FAD4665B29D1FF7600EA3AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */; };
 		FAD4665E29D1FF7600EA3AFB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD4665D29D1FF7600EA3AFB /* Preview Assets.xcassets */; };
 		FAD4666829D1FF7600EA3AFB /* PrintfulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4666729D1FF7600EA3AFB /* PrintfulTests.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		FAD4665329D1FF7500EA3AFB /* Printful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Printful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulApp.swift; sourceTree = "<group>"; };
-		FAD4665829D1FF7500EA3AFB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FAD4665829D1FF7500EA3AFB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD4665D29D1FF7600EA3AFB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FAD4666329D1FF7600EA3AFB /* PrintfulTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrintfulTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,8 +94,9 @@
 		FAD4665529D1FF7500EA3AFB /* Printful */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4668029D2377500EA3AFB /* Providers */,
 				FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */,
-				FAD4665829D1FF7500EA3AFB /* ContentView.swift */,
+				FAD4665829D1FF7500EA3AFB /* HomeView.swift */,
 				FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */,
 				FAD4665C29D1FF7600EA3AFB /* Preview Content */,
 			);
@@ -125,6 +126,13 @@
 				FAD4667329D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift */,
 			);
 			path = PrintfulUITests;
+			sourceTree = "<group>";
+		};
+		FAD4668029D2377500EA3AFB /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAD4665929D1FF7500EA3AFB /* ContentView.swift in Sources */,
+				FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */,
 				FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
