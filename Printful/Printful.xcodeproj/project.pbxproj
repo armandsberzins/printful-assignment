@@ -14,6 +14,8 @@
 		FAD4666829D1FF7600EA3AFB /* PrintfulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4666729D1FF7600EA3AFB /* PrintfulTests.swift */; };
 		FAD4667229D1FF7600EA3AFB /* PrintfulUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4667129D1FF7600EA3AFB /* PrintfulUITests.swift */; };
 		FAD4667429D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4667329D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift */; };
+		FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668B29D2413600EA3AFB /* RootView.swift */; };
+		FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668D29D2415C00EA3AFB /* TabController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		FAD4666D29D1FF7600EA3AFB /* PrintfulUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrintfulUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD4667129D1FF7600EA3AFB /* PrintfulUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulUITests.swift; sourceTree = "<group>"; };
 		FAD4667329D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FAD4668B29D2413600EA3AFB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		FAD4668D29D2415C00EA3AFB /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,8 @@
 		FAD4668A29D23A9300EA3AFB /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4668B29D2413600EA3AFB /* RootView.swift */,
+				FAD4668D29D2415C00EA3AFB /* TabController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -346,7 +352,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */,
+				FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */,
 				FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */,
+				FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
