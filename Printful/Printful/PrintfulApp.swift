@@ -8,13 +8,10 @@
 import SwiftUI
 
 @main
-struct PrintfulApp: App {
-    @StateObject private var dataController = DataController()
-    
+struct PrintfulApp: App {   
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

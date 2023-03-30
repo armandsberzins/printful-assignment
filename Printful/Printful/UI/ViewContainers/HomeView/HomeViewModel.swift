@@ -5,6 +5,7 @@
 //  Created by Armands Berzins on 28/03/2023.
 //
 
+import CoreData
 import Combine
 import Foundation
 
@@ -21,6 +22,7 @@ extension HomeView {
         //MARK: - global objects
         
         //MARK: - setup
+        
         init() {
             mainLableText = "Hello, Printful!"
         }
@@ -34,5 +36,6 @@ extension HomeView {
         //MARK: - react on user action
         
         //MARK: - deinit
+        
     }
 }

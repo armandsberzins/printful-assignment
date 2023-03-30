@@ -22,7 +22,10 @@
 		FAD4669729D2461100EA3AFB /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */; };
 		FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669829D246E400EA3AFB /* ApiError.swift */; };
 		FAD4669C29D24EC400EA3AFB /* Basic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */; };
-		FAD4669E29D24F4F00EA3AFB /* DataContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669D29D24F4F00EA3AFB /* DataContoller.swift */; };
+		FAD466A029D2B8D600EA3AFB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669F29D2B8D600EA3AFB /* CoreDataManager.swift */; };
+		FAD466A629D3869500EA3AFB /* BasicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD466A529D3869500EA3AFB /* BasicRepository.swift */; };
+		FAD466A829D3876000EA3AFB /* BasicStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD466A729D3876000EA3AFB /* BasicStorage.swift */; };
+		FAD466AB29D4F9A500EA3AFB /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD466AA29D4F9A500EA3AFB /* Basic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +64,10 @@
 		FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		FAD4669829D246E400EA3AFB /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		FAD4669B29D24EC400EA3AFB /* Basic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Basic.xcdatamodel; sourceTree = "<group>"; };
-		FAD4669D29D24F4F00EA3AFB /* DataContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContoller.swift; sourceTree = "<group>"; };
+		FAD4669F29D2B8D600EA3AFB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FAD466A529D3869500EA3AFB /* BasicRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicRepository.swift; sourceTree = "<group>"; };
+		FAD466A729D3876000EA3AFB /* BasicStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicStorage.swift; sourceTree = "<group>"; };
+		FAD466AA29D4F9A500EA3AFB /* Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +167,7 @@
 		FAD4668129D2391B00EA3AFB /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
+				FAD466A929D4F98300EA3AFB /* BaiscData */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -169,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD4669829D246E400EA3AFB /* ApiError.swift */,
+				FAD466AA29D4F9A500EA3AFB /* Basic.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,6 +202,7 @@
 		FAD4668529D239A300EA3AFB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4669F29D2B8D600EA3AFB /* CoreDataManager.swift */,
 				FAD4669429D245A800EA3AFB /* NetworkManager.swift */,
 				FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */,
 			);
@@ -203,8 +212,7 @@
 		FAD4668629D239AF00EA3AFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */,
-				FAD4669D29D24F4F00EA3AFB /* DataContoller.swift */,
+				FAD466A429D3855400EA3AFB /* Basic */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -248,6 +256,23 @@
 				FAD4669229D2450600EA3AFB /* String+ValidUrl.swift */,
 			);
 			path = String;
+			sourceTree = "<group>";
+		};
+		FAD466A429D3855400EA3AFB /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */,
+				FAD466A529D3869500EA3AFB /* BasicRepository.swift */,
+				FAD466A729D3876000EA3AFB /* BasicStorage.swift */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		FAD466A929D4F98300EA3AFB /* BaiscData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BaiscData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,15 +407,18 @@
 			files = (
 				FAD4669729D2461100EA3AFB /* ReachabilityManager.swift in Sources */,
 				FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */,
+				FAD466AB29D4F9A500EA3AFB /* Basic.swift in Sources */,
+				FAD466A629D3869500EA3AFB /* BasicRepository.swift in Sources */,
 				FAD4669C29D24EC400EA3AFB /* Basic.xcdatamodeld in Sources */,
 				FAD4669329D2450600EA3AFB /* String+ValidUrl.swift in Sources */,
 				FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */,
 				FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */,
-				FAD4669E29D24F4F00EA3AFB /* DataContoller.swift in Sources */,
+				FAD466A029D2B8D600EA3AFB /* CoreDataManager.swift in Sources */,
 				FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */,
 				FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */,
 				FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */,
 				FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */,
+				FAD466A829D3876000EA3AFB /* BasicStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
