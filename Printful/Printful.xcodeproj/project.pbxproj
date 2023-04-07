@@ -14,6 +14,18 @@
 		FAD4666829D1FF7600EA3AFB /* PrintfulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4666729D1FF7600EA3AFB /* PrintfulTests.swift */; };
 		FAD4667229D1FF7600EA3AFB /* PrintfulUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4667129D1FF7600EA3AFB /* PrintfulUITests.swift */; };
 		FAD4667429D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4667329D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift */; };
+		FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668B29D2413600EA3AFB /* RootView.swift */; };
+		FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668D29D2415C00EA3AFB /* TabController.swift */; };
+		FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4668F29D2427300EA3AFB /* HomeViewModel.swift */; };
+		FAD4669329D2450600EA3AFB /* String+ValidUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669229D2450600EA3AFB /* String+ValidUrl.swift */; };
+		FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669429D245A800EA3AFB /* NetworkManager.swift */; };
+		FAD4669729D2461100EA3AFB /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */; };
+		FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669829D246E400EA3AFB /* ApiError.swift */; };
+		FAD4669C29D24EC400EA3AFB /* Basic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */; };
+		FAD466A029D2B8D600EA3AFB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4669F29D2B8D600EA3AFB /* CoreDataManager.swift */; };
+		FAD466A629D3869500EA3AFB /* BasicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD466A529D3869500EA3AFB /* BasicRepository.swift */; };
+		FAD466A829D3876000EA3AFB /* BasicStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD466A729D3876000EA3AFB /* BasicStorage.swift */; };
+		FAD466AB29D4F9A500EA3AFB /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD466AA29D4F9A500EA3AFB /* Basic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +56,18 @@
 		FAD4666D29D1FF7600EA3AFB /* PrintfulUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrintfulUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD4667129D1FF7600EA3AFB /* PrintfulUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulUITests.swift; sourceTree = "<group>"; };
 		FAD4667329D1FF7600EA3AFB /* PrintfulUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FAD4668B29D2413600EA3AFB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		FAD4668D29D2415C00EA3AFB /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
+		FAD4668F29D2427300EA3AFB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FAD4669229D2450600EA3AFB /* String+ValidUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ValidUrl.swift"; sourceTree = "<group>"; };
+		FAD4669429D245A800EA3AFB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
+		FAD4669829D246E400EA3AFB /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		FAD4669B29D24EC400EA3AFB /* Basic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Basic.xcdatamodel; sourceTree = "<group>"; };
+		FAD4669F29D2B8D600EA3AFB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FAD466A529D3869500EA3AFB /* BasicRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicRepository.swift; sourceTree = "<group>"; };
+		FAD466A729D3876000EA3AFB /* BasicStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicStorage.swift; sourceTree = "<group>"; };
+		FAD466AA29D4F9A500EA3AFB /* Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +118,12 @@
 		FAD4665529D1FF7500EA3AFB /* Printful */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4668329D2395B00EA3AFB /* Extensions */,
+				FAD4668229D2394900EA3AFB /* Models */,
 				FAD4668029D2377500EA3AFB /* Providers */,
+				FAD4668129D2391B00EA3AFB /* Interactors */,
+				FAD4668429D2398A00EA3AFB /* UI */,
 				FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */,
-				FAD4665829D1FF7500EA3AFB /* HomeView.swift */,
 				FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */,
 				FAD4665C29D1FF7600EA3AFB /* Preview Content */,
 			);
@@ -131,8 +158,121 @@
 		FAD4668029D2377500EA3AFB /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				FAD4668629D239AF00EA3AFB /* Repositories */,
+				FAD4668529D239A300EA3AFB /* Managers */,
 			);
 			path = Providers;
+			sourceTree = "<group>";
+		};
+		FAD4668129D2391B00EA3AFB /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				FAD466A929D4F98300EA3AFB /* BaiscData */,
+			);
+			path = Interactors;
+			sourceTree = "<group>";
+		};
+		FAD4668229D2394900EA3AFB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4669829D246E400EA3AFB /* ApiError.swift */,
+				FAD466AA29D4F9A500EA3AFB /* Basic.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FAD4668329D2395B00EA3AFB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4669129D2446B00EA3AFB /* String */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FAD4668429D2398A00EA3AFB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4668829D23A1300EA3AFB /* ViewContainers */,
+				FAD4668729D23A0400EA3AFB /* ViewComponents */,
+				FAD4668A29D23A9300EA3AFB /* Root */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		FAD4668529D239A300EA3AFB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4669F29D2B8D600EA3AFB /* CoreDataManager.swift */,
+				FAD4669429D245A800EA3AFB /* NetworkManager.swift */,
+				FAD4669629D2461100EA3AFB /* ReachabilityManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		FAD4668629D239AF00EA3AFB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				FAD466A429D3855400EA3AFB /* Basic */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		FAD4668729D23A0400EA3AFB /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		FAD4668829D23A1300EA3AFB /* ViewContainers */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4668929D23A2D00EA3AFB /* HomeView */,
+			);
+			path = ViewContainers;
+			sourceTree = "<group>";
+		};
+		FAD4668929D23A2D00EA3AFB /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4665829D1FF7500EA3AFB /* HomeView.swift */,
+				FAD4668F29D2427300EA3AFB /* HomeViewModel.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		FAD4668A29D23A9300EA3AFB /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4668B29D2413600EA3AFB /* RootView.swift */,
+				FAD4668D29D2415C00EA3AFB /* TabController.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		FAD4669129D2446B00EA3AFB /* String */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4669229D2450600EA3AFB /* String+ValidUrl.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		FAD466A429D3855400EA3AFB /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */,
+				FAD466A529D3869500EA3AFB /* BasicRepository.swift */,
+				FAD466A729D3876000EA3AFB /* BasicStorage.swift */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		FAD466A929D4F98300EA3AFB /* BaiscData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BaiscData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,8 +405,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD4669729D2461100EA3AFB /* ReachabilityManager.swift in Sources */,
 				FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */,
+				FAD466AB29D4F9A500EA3AFB /* Basic.swift in Sources */,
+				FAD466A629D3869500EA3AFB /* BasicRepository.swift in Sources */,
+				FAD4669C29D24EC400EA3AFB /* Basic.xcdatamodeld in Sources */,
+				FAD4669329D2450600EA3AFB /* String+ValidUrl.swift in Sources */,
+				FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */,
+				FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */,
+				FAD466A029D2B8D600EA3AFB /* CoreDataManager.swift in Sources */,
+				FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */,
 				FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */,
+				FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */,
+				FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */,
+				FAD466A829D3876000EA3AFB /* BasicStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +743,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FAD4669A29D24EC400EA3AFB /* Basic.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FAD4669B29D24EC400EA3AFB /* Basic.xcdatamodel */,
+			);
+			currentVersion = FAD4669B29D24EC400EA3AFB /* Basic.xcdatamodel */;
+			path = Basic.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FAD4664B29D1FF7500EA3AFB /* Project object */;
 }
