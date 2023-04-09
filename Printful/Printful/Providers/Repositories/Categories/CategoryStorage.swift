@@ -115,10 +115,10 @@ struct CategoriesStorage {
                 
                 return Category(id: id,
                                 parentID: parent,
-                         imageURL: image,
-                         catalogPosition: position,
-                         size: nil,
-                         title: title)
+                                imageURL: image,
+                                catalogPosition: position,
+                                size: nil,
+                                title: title)
             }.filter{ $0.id != kNilHolderInt }
 
             if categories.isEmpty { return nil }
@@ -137,24 +137,20 @@ struct CategoriesStorage {
     static func delete() {
         let coreDataManager = CoreDataManager(modelName: kModelName)
         
-        guard let entity = NSEntityDescription.entity(forEntityName: kEntityName, in: coreDataManager.managedObjectContext) else { return }
-        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: kEntityName)
         
         do {
-            let allCategoriesCD = try coreDataManager.managedObjectContext.fetch(fetchRequest)
-            
-            allCategoriesCD.forEach {
+            try coreDataManager.managedObjectContext.fetch(fetchRequest).forEach {
                 coreDataManager.managedObjectContext.delete($0)
             }
         } catch {
-            print("Error: Cloudn't delete")
+            print("Error: Couldn't delete")
         }
         
         do {
             try coreDataManager.managedObjectContext.save()
         } catch {
-            print("Error: Cloudn't delete")
+            print("Error: Couldn't delete")
         }
     }
     

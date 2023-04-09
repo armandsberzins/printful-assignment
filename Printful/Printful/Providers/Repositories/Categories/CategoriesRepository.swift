@@ -13,16 +13,23 @@ protocol CategoriesRepositoryProtocol {
 }
 
 class CategoriesRepository: CategoriesRepositoryProtocol {
+    
     let networkManager: NetworkManager
     
     init(networkManager: NetworkManager = NetworkManager()) {
         self.networkManager = networkManager
     }
     
+    #warning("Add cache time handling")
+    
     internal func get() -> Future<CateogryResult, ApiError> {
         Future { promise in
             
             if let local = CategoriesStorage.load() {
+                /** If data are stored already show them immediately and update in background
+                 since these are not critcal time sensitive data
+                 */
+                
                 promise(.success(local))
                 self.updateInBackground()
             } else {

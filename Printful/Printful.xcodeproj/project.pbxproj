@@ -11,6 +11,7 @@
 		FA5E485429E0986E00ECE577 /* CategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E485329E0986E00ECE577 /* CategoriesRepository.swift */; };
 		FA5E485629E099C200ECE577 /* CategoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E485529E099C200ECE577 /* CategoryStorage.swift */; };
 		FA5E485929E15CE100ECE577 /* Category.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA5E485729E15CE100ECE577 /* Category.xcdatamodeld */; };
+		FA5E485B29E2A7B100ECE577 /* GetCategoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E485A29E2A7B100ECE577 /* GetCategoriesInteractor.swift */; };
 		FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */; };
 		FAD4665929D1FF7500EA3AFB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665829D1FF7500EA3AFB /* HomeView.swift */; };
 		FAD4665B29D1FF7600EA3AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		FA5E485329E0986E00ECE577 /* CategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesRepository.swift; sourceTree = "<group>"; };
 		FA5E485529E099C200ECE577 /* CategoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStorage.swift; sourceTree = "<group>"; };
 		FA5E485829E15CE100ECE577 /* Categories.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Categories.xcdatamodel; sourceTree = "<group>"; };
+		FA5E485A29E2A7B100ECE577 /* GetCategoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategoriesInteractor.swift; sourceTree = "<group>"; };
 		FAD4665329D1FF7500EA3AFB /* Printful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Printful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulApp.swift; sourceTree = "<group>"; };
 		FAD4665829D1FF7500EA3AFB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 				FA5E485329E0986E00ECE577 /* CategoriesRepository.swift */,
 				FA5E485529E099C200ECE577 /* CategoryStorage.swift */,
 				FA5E485729E15CE100ECE577 /* Category.xcdatamodeld */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		FA5E485C29E2A7B700ECE577 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				FA5E485A29E2A7B100ECE577 /* GetCategoriesInteractor.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -177,7 +187,7 @@
 		FAD4668129D2391B00EA3AFB /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
-				FAD466A929D4F98300EA3AFB /* BaiscData */,
+				FA5E485C29E2A7B700ECE577 /* Categories */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -266,13 +276,6 @@
 				FAD4669229D2450600EA3AFB /* String+ValidUrl.swift */,
 			);
 			path = String;
-			sourceTree = "<group>";
-		};
-		FAD466A929D4F98300EA3AFB /* BaiscData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BaiscData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,6 +419,7 @@
 				FA5E485429E0986E00ECE577 /* CategoriesRepository.swift in Sources */,
 				FA5E485129E0184400ECE577 /* Category.swift in Sources */,
 				FAD4669029D2427300EA3AFB /* HomeViewModel.swift in Sources */,
+				FA5E485B29E2A7B100ECE577 /* GetCategoriesInteractor.swift in Sources */,
 				FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */,
 				FA5E485929E15CE100ECE577 /* Category.xcdatamodeld in Sources */,
 				FA5E485629E099C200ECE577 /* CategoryStorage.swift in Sources */,
