@@ -9,13 +9,17 @@ import CoreData
 import Combine
 import Foundation
 
-extension HomeView {
+#warning("Add error handling and differentiate between no data because of loading and final no data")
+
+extension ProductsView {
     @MainActor
-    class HomeViewModel: ObservableObject, GetCategoriesInteractor {
+    class ProductsViewModel: ObservableObject, GetCategoriesInteractor {
         //MARK: - dependencies
         
         //MARK: - outlets
         @Published var mainLableText = ""
+        @Published var gridContent: [TagModel] = []
+        @Published var error: ApiError? = nil
         
         //MARK: - constants
         
@@ -39,7 +43,7 @@ extension HomeView {
                         self.handle(completion)
                     },
                     receiveValue: {
-                        self.add($0.categories)
+                        self.handle($0.categories)
                     }
                 )
         }
@@ -50,29 +54,28 @@ extension HomeView {
         
         //MARK: - react on data change
         
-        private func add(_ categories: [Category]) {
-            print(categories)
-//            let cellModel = ComicCellPorperties(title: comic.title,
-//                                                issue: comic.num,
-//                                                imageUrl: comic.img)
-//
-//            if self.comics == nil {
-//                self.comics = ComicsViewProperies(arrayLiteral: cellModel)
-//            } else {
-//                self.comics?.append(cellModel)
-//            }
+        private func handle(_ categories: [Category]) {
+            let gridFormat: [TagModel] = categories
+                .filter{
+                    $0.title != nil
+                }
+                .map {
+                    return TagModel(title: $0.title ?? "") // default value should never happen
+                }
+            
+            self.gridContent = gridFormat
         }
         
         
         private func handle(_ completion: Subscribers.Completion<ApiError>) {
-//            switch completion {
-//            case .failure(let apiError):
-//                self.error = apiError
-//            case .finished:
-//                self.error = nil
-//            }
-//
-//            self.showAlert = self.error != nil
+            switch completion {
+            case .failure(let apiError):
+                self.error = apiError
+            case .finished:
+                self.error = nil
+            }
+
+            //self.showAlert = self.error != nil
         }
         
         //MARK: - react on user action

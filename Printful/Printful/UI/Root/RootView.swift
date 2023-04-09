@@ -12,10 +12,10 @@ struct RootView: View {
     
     var body: some View {
         TabView(selection: $tabController.activeTab) {
-            HomeView()
+            ProductsView()
                 .tag(Tab.home)
                 .tabItem {
-                    Label("", systemImage: "tshirt.fill")
+                    Label("Products", systemImage: "tshirt.fill")
                 }
         }
     }
