@@ -25,6 +25,10 @@ extension HomeView {
         
         init() {
             mainLableText = "Hello, Printful!"
+            let catRepo = CategoriesRepository()
+            let categories = catRepo.get()
+            
+            print(categories)
         }
         
         //MARK: - lifecycle
