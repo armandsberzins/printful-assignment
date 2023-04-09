@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+#warning("Consider to make global error alert listener so .alert does not need to be implementet on every view (DRY)")
+
 struct ProductsView: View {
     @StateObject private var viewModel = ProductsViewModel()
     
@@ -32,6 +34,16 @@ struct ProductsView: View {
                     .padding(.horizontal, 10)
                 }
             }
-        }
+            
+            if viewModel.error != nil {
+                Button("Try again load categories", action: {
+                    viewModel.loadCategories()
+                })
+            }
+            
+        }.alert(
+            isPresented: $viewModel.showAlert,
+            content: { Alert(title: Text(viewModel.error?.description ?? "")) }
+        )
     }
 }

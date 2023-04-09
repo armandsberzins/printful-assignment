@@ -17,9 +17,9 @@ extension ProductsView {
         //MARK: - dependencies
         
         //MARK: - outlets
-        @Published var mainLableText = ""
         @Published var gridContent: [TagModel] = []
         @Published var error: ApiError? = nil
+        @Published var showAlert: Bool = false
         
         //MARK: - constants
         
@@ -28,13 +28,11 @@ extension ProductsView {
         private static let categoriesQueue = DispatchQueue(label: "CategoriesQueue")
         
         //MARK: - setup
-        
         init() {
-            mainLableText = "Hello, Printful!"
             loadCategories()
         }
         
-        private func loadCategories() {
+        func loadCategories() {
             cancelable = getCategories()
                 .subscribe(on: Self.categoriesQueue)
                 .receive(on: DispatchQueue.main)
@@ -60,7 +58,8 @@ extension ProductsView {
                     $0.title != nil
                 }
                 .map {
-                    return TagModel(title: $0.title ?? "") // default value should never happen
+                    let tagTitle = "\($0.title ?? "") P\(($0.parentID ?? 0) + 1)"
+                    return TagModel(title: tagTitle)
                 }
             
             self.gridContent = gridFormat
@@ -75,12 +74,14 @@ extension ProductsView {
                 self.error = nil
             }
 
-            //self.showAlert = self.error != nil
+            self.showAlert = self.error != nil
         }
         
         //MARK: - react on user action
         
         //MARK: - deinit
-        
+        deinit {
+            cancelable?.cancel()
+        }
     }
 }
