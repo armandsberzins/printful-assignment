@@ -16,6 +16,7 @@
 		FA5E486229E2B3F800ECE577 /* readSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E486129E2B3F800ECE577 /* readSize.swift */; };
 		FA5E486529E2B4CB00ECE577 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E486429E2B4CB00ECE577 /* TagModel.swift */; };
 		FA5E486729E5511E00ECE577 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E486629E5511E00ECE577 /* Constants.swift */; };
+		FA5E486929E555C500ECE577 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E486829E555C500ECE577 /* Root.swift */; };
 		FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */; };
 		FAD4665929D1FF7500EA3AFB /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665829D1FF7500EA3AFB /* ProductsView.swift */; };
 		FAD4665B29D1FF7600EA3AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		FA5E486129E2B3F800ECE577 /* readSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = readSize.swift; sourceTree = "<group>"; };
 		FA5E486429E2B4CB00ECE577 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		FA5E486629E5511E00ECE577 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FA5E486829E555C500ECE577 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
 		FAD4665329D1FF7500EA3AFB /* Printful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Printful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulApp.swift; sourceTree = "<group>"; };
 		FAD4665829D1FF7500EA3AFB /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */,
 				FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */,
 				FAD4665C29D1FF7600EA3AFB /* Preview Content */,
+				FA5E486829E555C500ECE577 /* Root.swift */,
 			);
 			path = Printful;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				FA5E486529E2B4CB00ECE577 /* TagModel.swift in Sources */,
 				FAD4668E29D2415C00EA3AFB /* TabController.swift in Sources */,
 				FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */,
+				FA5E486929E555C500ECE577 /* Root.swift in Sources */,
 				FAD466A029D2B8D600EA3AFB /* CoreDataManager.swift in Sources */,
 				FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */,
 				FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */,

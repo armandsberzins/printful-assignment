@@ -9,23 +9,27 @@ import Combine
 import Foundation
 
 protocol CategoriesRepositoryProtocol {
-    func get() -> Future<CateogryResult, ApiError>
+    func getCachedOrFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
 }
 
-class CategoriesRepository: CategoriesRepositoryProtocol {
+extension CategoriesRepositoryProtocol where Self: Interactor {
+    func getCachedOrFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError> {
+        let categoriesRepo = CategoriesRepository(networkManager: networkManager)
+        return categoriesRepo.get()
+    }
+}
+
+class CategoriesRepository: Repository {
     
     private let url = Constants.URL.apiWith(path: "categories")
     
     private let networkManager: NetworkManager
     
-    init(networkManager: NetworkManager = NetworkManager()) {
+    init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }
 
-#warning("Make constants class for URLs")
-#warning("Limit who can use Repository and what can use Repository")
-    
-    internal func get() -> Future<CateogryResult, ApiError> {
+    fileprivate func get() -> Future<CateogryResult, ApiError> {
         Future { promise in
             
             CategoriesStorage.deleteOutdated()
