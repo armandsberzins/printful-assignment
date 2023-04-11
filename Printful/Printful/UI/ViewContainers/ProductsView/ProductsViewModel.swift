@@ -9,8 +9,6 @@ import CoreData
 import Combine
 import Foundation
 
-#warning("Add error handling and differentiate between no data because of loading and final no data")
-
 extension ProductsView {
     @MainActor
     class ProductsViewModel: ObservableObject, GetCategoriesInteractor {
@@ -20,6 +18,7 @@ extension ProductsView {
         @Published var gridContent: [TagModel] = []
         @Published var error: ApiError? = nil
         @Published var showAlert: Bool = false
+        @Published var showLoading: Bool = false
         
         //MARK: - constants
         
@@ -33,6 +32,7 @@ extension ProductsView {
         }
         
         func loadCategories() {
+            showLoading = true
             cancelable = getCategories()
                 .subscribe(on: Self.categoriesQueue)
                 .receive(on: DispatchQueue.main)
@@ -61,7 +61,7 @@ extension ProductsView {
                     let tagTitle = "\($0.title ?? "") P\(($0.parentID ?? 0) + 1)"
                     return TagModel(title: tagTitle)
                 }
-            
+            showLoading = false
             self.gridContent = gridFormat
         }
         
@@ -73,7 +73,8 @@ extension ProductsView {
             case .finished:
                 self.error = nil
             }
-
+            
+            showLoading = false
             self.showAlert = self.error != nil
         }
         

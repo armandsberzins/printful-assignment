@@ -14,7 +14,7 @@ struct ProductsView: View {
     
     var body: some View {
         VStack {
-            if viewModel.gridContent.isEmpty {
+            if viewModel.showLoading {
                 ProgressView()
             } else {
                 ScrollView(.vertical, showsIndicators: true) {
