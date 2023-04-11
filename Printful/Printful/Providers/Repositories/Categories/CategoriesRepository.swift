@@ -14,7 +14,9 @@ protocol CategoriesRepositoryProtocol {
 
 class CategoriesRepository: CategoriesRepositoryProtocol {
     
-    let networkManager: NetworkManager
+    private let url = Constants.URL.apiWith(path: "categories")
+    
+    private let networkManager: NetworkManager
     
     init(networkManager: NetworkManager = NetworkManager()) {
         self.networkManager = networkManager
@@ -46,7 +48,7 @@ class CategoriesRepository: CategoriesRepositoryProtocol {
                     promise(.failure(networkManagerError))
                 }
                 
-                self.networkManager.get(urlString: "https://api.printful.com/categories",
+                self.networkManager.get(urlString: self.url,
                                         successHandler: successHandler,
                                         errorHandler: errorHandler)
             }
@@ -54,7 +56,7 @@ class CategoriesRepository: CategoriesRepositoryProtocol {
     }
     
     private func updateInBackground() {
-        self.networkManager.get(urlString: "https://api.printful.com/categories",
+        self.networkManager.get(urlString: url,
                                 successHandler: { successResponse in CategoriesStorage.save(successResponse)},
                                 errorHandler: { _ in })
     }
