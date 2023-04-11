@@ -19,11 +19,14 @@ class CategoriesRepository: CategoriesRepositoryProtocol {
     init(networkManager: NetworkManager = NetworkManager()) {
         self.networkManager = networkManager
     }
-    
-    #warning("Add cache time handling")
+
+#warning("Make constants class for URLs")
+#warning("Limit who can use Repository and what can use Repository")
     
     internal func get() -> Future<CateogryResult, ApiError> {
         Future { promise in
+            
+            CategoriesStorage.deleteOutdated()
             
             if let local = CategoriesStorage.load() {
                 /** If data are stored already show them immediately and update in background

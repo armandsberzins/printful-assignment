@@ -15,29 +15,34 @@ enum CategoryEnityKey: String {
     case position
     case size
     case title
+    case downloadedDate
 }
 
 struct CategoriesStorage {
-    static let kModelName = "Category"
-    static let kEntityName = "CategoryCD"
+    private static let kCacheTimeInMinutes = 10 // just my idea that 10 minutes is optimal cache time for categories
     
-    static let kNilHolderInt = -999
-    static let kNilHolderString = "NULLNULL"
+    private static let coreDataManager = CoreDataManager(modelName: "Category")
+    private static let kEntityName = "CategoryCD"
     
-    #warning("Improve Category to Entity converting for nil values")
+    private static let kNilHolderInt = -999
+    private static let kNilHolderString = "NULLNULL"
+    
+#warning("Improve Category to Entity converting for nil values")
+#warning("Protocolize this Cache")
+#warning("Limit who can use this Cache and what can use Cache")
     
     //MARK: - create
     static func save(_ result: CateogryResult) {
-        let coreDataManager = CoreDataManager(modelName: kModelName)
-
+        
         guard let entity = NSEntityDescription.entity(forEntityName: kEntityName, in: coreDataManager.managedObjectContext) else { return }
-
-
-
+        
+        
+        
         result.categories.forEach { category in
             let categoryCD = NSManagedObject(entity: entity, insertInto: coreDataManager.managedObjectContext)
             
             categoryCD.setValue(category.id, forKey: CategoryEnityKey.id.rawValue)
+            categoryCD.setValue(Date.now, forKey: CategoryEnityKey.downloadedDate.rawValue)
             
             if let parent = category.parentID {
                 categoryCD.setValue(parent, forKey: CategoryEnityKey.parentId.rawValue)
@@ -73,10 +78,9 @@ struct CategoriesStorage {
     
     //MARK: - read
     static func load() -> CateogryResult? {
-        let coreDataManager = CoreDataManager(modelName: kModelName)
-
+        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: kEntityName)
-
+        
         do {
             let allCategoriesCD = try coreDataManager.managedObjectContext.fetch(fetchRequest)
             
@@ -120,7 +124,7 @@ struct CategoriesStorage {
                                 size: nil,
                                 title: title)
             }.filter{ $0.id != kNilHolderInt }
-
+            
             if categories.isEmpty { return nil }
             
             return CateogryResult(categories: categories)
@@ -134,10 +138,12 @@ struct CategoriesStorage {
     /* add this when real single data update will happen */
     
     //MARK: - delete
-    static func delete() {
-        let coreDataManager = CoreDataManager(modelName: kModelName)
-        
+    static func delete(with predicate: NSPredicate? = nil) {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: kEntityName)
+        
+        if let predicate = predicate {
+            fetchRequest.predicate = predicate
+        }
         
         do {
             try coreDataManager.managedObjectContext.fetch(fetchRequest).forEach {
@@ -154,4 +160,14 @@ struct CategoriesStorage {
         }
     }
     
+    static func deleteOutdated() {
+
+        let cal = Calendar.current
+
+        guard let cacheExpDate = cal.date(byAdding: .minute, value: -1*kCacheTimeInMinutes, to: Date.now) else { return }
+        
+        let predicate = NSPredicate(format: "downloadedDate < %@", cacheExpDate as NSDate)
+        
+        delete(with: predicate)
+    }
 }

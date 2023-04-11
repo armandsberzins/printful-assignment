@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 
+#warning("Limit who can use Interactor and what can use Interactor")
 protocol GetCategoriesInteractor {
     func getCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
 }
