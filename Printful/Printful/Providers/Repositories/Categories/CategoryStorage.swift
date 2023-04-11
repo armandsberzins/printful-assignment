@@ -1,0 +1,173 @@
+//
+//  CategoryStorage.swift
+//  Printful
+//
+//  Created by Armands Berzins on 07/04/2023.
+//
+
+import CoreData
+import Foundation
+
+enum CategoryEnityKey: String {
+    case id
+    case parentId
+    case imageUrl
+    case position
+    case size
+    case title
+    case downloadedDate
+}
+
+struct CategoriesStorage {
+    private static let kCacheTimeInMinutes = 10 // just my idea that 10 minutes is optimal cache time for categories
+    
+    private static let coreDataManager = CoreDataManager(modelName: "Category")
+    private static let kEntityName = "CategoryCD"
+    
+    private static let kNilHolderInt = -999
+    private static let kNilHolderString = "NULLNULL"
+    
+#warning("Improve Category to Entity converting for nil values")
+#warning("Protocolize this Cache")
+#warning("Limit who can use this Cache and what can use Cache")
+    
+    //MARK: - create
+    static func save(_ result: CateogryResult) {
+        
+        guard let entity = NSEntityDescription.entity(forEntityName: kEntityName, in: coreDataManager.managedObjectContext) else { return }
+        
+        
+        
+        result.categories.forEach { category in
+            let categoryCD = NSManagedObject(entity: entity, insertInto: coreDataManager.managedObjectContext)
+            
+            categoryCD.setValue(category.id, forKey: CategoryEnityKey.id.rawValue)
+            categoryCD.setValue(Date.now, forKey: CategoryEnityKey.downloadedDate.rawValue)
+            
+            if let parent = category.parentID {
+                categoryCD.setValue(parent, forKey: CategoryEnityKey.parentId.rawValue)
+            } else {
+                categoryCD.setValue(kNilHolderInt, forKey: CategoryEnityKey.parentId.rawValue)
+            }
+            
+            if let value = category.imageURL {
+                categoryCD.setValue(value, forKey: CategoryEnityKey.imageUrl.rawValue)
+            } else {
+                categoryCD.setValue(kNilHolderString, forKey: CategoryEnityKey.imageUrl.rawValue)
+            }
+            
+            if let value = category.catalogPosition {
+                categoryCD.setValue(value, forKey: CategoryEnityKey.position.rawValue)
+            } else {
+                categoryCD.setValue(kNilHolderInt, forKey: CategoryEnityKey.position.rawValue)
+            }
+            
+            if let value = category.title {
+                categoryCD.setValue(value, forKey: CategoryEnityKey.title.rawValue)
+            } else {
+                categoryCD.setValue(kNilHolderString, forKey: CategoryEnityKey.title.rawValue)
+            }
+            
+            do {
+                try coreDataManager.managedObjectContext.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
+    //MARK: - read
+    static func load() -> CateogryResult? {
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: kEntityName)
+        
+        do {
+            let allCategoriesCD = try coreDataManager.managedObjectContext.fetch(fetchRequest)
+            
+            if allCategoriesCD.isEmpty { return nil }
+            
+            let categories: [Category] = allCategoriesCD.compactMap { cd in
+                let id = cd.value(forKey: CategoryEnityKey.id.rawValue) as? Int ?? kNilHolderInt
+                
+                var parent: Int? = nil
+                if let value = cd.value(forKey: CategoryEnityKey.parentId.rawValue) as? Int {
+                    if value != kNilHolderInt {
+                        parent = value
+                    }
+                }
+                
+                var image: String? = nil
+                if let value = cd.value(forKey: CategoryEnityKey.imageUrl.rawValue) as? String {
+                    if value != kNilHolderString {
+                        image = value
+                    }
+                }
+                
+                var position: Int? = nil
+                if let value = cd.value(forKey: CategoryEnityKey.position.rawValue) as? Int {
+                    if value != kNilHolderInt {
+                        position = value
+                    }
+                }
+                
+                var title: String? = nil
+                if let value = cd.value(forKey: CategoryEnityKey.title.rawValue) as? String {
+                    if value != kNilHolderString {
+                        title = value
+                    }
+                }
+                
+                return Category(id: id,
+                                parentID: parent,
+                                imageURL: image,
+                                catalogPosition: position,
+                                size: nil,
+                                title: title)
+            }.filter{ $0.id != kNilHolderInt }
+            
+            if categories.isEmpty { return nil }
+            
+            return CateogryResult(categories: categories)
+        } catch {
+            print("Error: Cloudn't load from cahce")
+            return nil
+        }
+    }
+    
+    //MARK: - update
+    /* add this when real single data update will happen */
+    
+    //MARK: - delete
+    static func delete(with predicate: NSPredicate? = nil) {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: kEntityName)
+        
+        if let predicate = predicate {
+            fetchRequest.predicate = predicate
+        }
+        
+        do {
+            try coreDataManager.managedObjectContext.fetch(fetchRequest).forEach {
+                coreDataManager.managedObjectContext.delete($0)
+            }
+        } catch {
+            print("Error: Couldn't delete")
+        }
+        
+        do {
+            try coreDataManager.managedObjectContext.save()
+        } catch {
+            print("Error: Couldn't delete")
+        }
+    }
+    
+    static func deleteOutdated() {
+
+        let cal = Calendar.current
+
+        guard let cacheExpDate = cal.date(byAdding: .minute, value: -1*kCacheTimeInMinutes, to: Date.now) else { return }
+        
+        let predicate = NSPredicate(format: "downloadedDate < %@", cacheExpDate as NSDate)
+        
+        delete(with: predicate)
+    }
+}
