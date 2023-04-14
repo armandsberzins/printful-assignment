@@ -27,7 +27,6 @@ struct CategoriesStorage {
     private static let kNilHolderInt = -999
     private static let kNilHolderString = "NULLNULL"
     
-#warning("Improve Category to Entity converting for nil values")
 #warning("Protocolize this Cache")
 #warning("Limit who can use this Cache and what can use Cache")
     
@@ -36,50 +35,93 @@ struct CategoriesStorage {
         
         guard let entity = NSEntityDescription.entity(forEntityName: kEntityName, in: coreDataManager.managedObjectContext) else { return }
         
-        
-        
         result.categories.forEach { category in
-            let categoryCD = NSManagedObject(entity: entity, insertInto: coreDataManager.managedObjectContext)
+            let predicate = NSPredicate(format: "id = %ld", category.id)
+            if load(with: predicate) != nil {
+                delete(with: predicate)
+            }
             
+            let categoryCD = NSManagedObject(entity: entity, insertInto: coreDataManager.managedObjectContext)
             categoryCD.setValue(category.id, forKey: CategoryEnityKey.id.rawValue)
             categoryCD.setValue(Date.now, forKey: CategoryEnityKey.downloadedDate.rawValue)
             
-            if let parent = category.parentID {
-                categoryCD.setValue(parent, forKey: CategoryEnityKey.parentId.rawValue)
-            } else {
-                categoryCD.setValue(kNilHolderInt, forKey: CategoryEnityKey.parentId.rawValue)
-            }
-            
-            if let value = category.imageURL {
-                categoryCD.setValue(value, forKey: CategoryEnityKey.imageUrl.rawValue)
-            } else {
-                categoryCD.setValue(kNilHolderString, forKey: CategoryEnityKey.imageUrl.rawValue)
-            }
-            
-            if let value = category.catalogPosition {
-                categoryCD.setValue(value, forKey: CategoryEnityKey.position.rawValue)
-            } else {
-                categoryCD.setValue(kNilHolderInt, forKey: CategoryEnityKey.position.rawValue)
-            }
-            
-            if let value = category.title {
-                categoryCD.setValue(value, forKey: CategoryEnityKey.title.rawValue)
-            } else {
-                categoryCD.setValue(kNilHolderString, forKey: CategoryEnityKey.title.rawValue)
-            }
+            trySet(value: category.parentID, for: .parentId, in: categoryCD)
+            trySet(value: category.imageURL, for: .imageUrl, in: categoryCD)
+            trySet(value: category.catalogPosition, for: .position, in: categoryCD)
+            trySet(value: category.title, for: .title, in: categoryCD)
             
             do {
                 try coreDataManager.managedObjectContext.save()
+                // try coreDataManager.managedObjectContext.update()
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
             }
         }
     }
     
+    private static func trySet(value: String?, for key: CategoryEnityKey, in object: NSManagedObject) {
+        if let value = value {
+            object.setValue(value, forKey: key.rawValue)
+        } else {
+            object.setValue(kNilHolderString, forKey: key.rawValue)
+        }
+    }
+    
+    private static func trySet(value: Int?, for key: CategoryEnityKey, in object: NSManagedObject) {
+        if let value = value {
+            object.setValue(value, forKey: key.rawValue)
+        } else {
+            object.setValue(kNilHolderString, forKey: key.rawValue)
+        }
+    }
+    
     //MARK: - read
     static func load() -> CateogryResult? {
-        
+        getFromDataBase()
+    }
+    
+    static func load(with predicate: NSPredicate? = nil) -> Category? {
+        let foundCategories = getFromDataBase(with: predicate)
+        if let categories = foundCategories?.categories {
+            if !categories.isEmpty {
+                return categories.first
+            }
+        }
+        return nil
+    }
+    
+    static func loadCategoriesGroupedByParentId() -> [Int: [Category]]? {
+        let groupedCategories = getParentIds().reduce(into: [Int: [Category]]()) {
+            let predicate = NSPredicate(format: "parentId = %ld", $1)
+            let categories: [Category] = getFromDataBase(with: predicate)?.categories ?? []
+            return $0[$1] = categories
+        }
+        if groupedCategories.isEmpty { return nil }
+        return groupedCategories
+    }
+    
+    static func getParentIds() -> [Int] {
+        let column = "parentId"
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: kEntityName)
+        request.resultType = .dictionaryResultType
+        request.returnsDistinctResults = true
+        request.propertiesToFetch = [column]
+        if let res = try? coreDataManager.managedObjectContext.fetch(request) as? [[String: Int]] {
+            return res.compactMap { $0[column] }
+        }
+        return []
+    }
+    
+    private static func getFromDataBase(with predicate: NSPredicate? = nil, sort: NSSortDescriptor? = nil) -> CateogryResult? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: kEntityName)
+        
+        if let predicate = predicate {
+            fetchRequest.predicate = predicate
+        }
+        
+        if let sort = sort {
+            fetchRequest.sortDescriptors = [sort]
+        }
         
         do {
             let allCategoriesCD = try coreDataManager.managedObjectContext.fetch(fetchRequest)
@@ -89,40 +131,12 @@ struct CategoriesStorage {
             let categories: [Category] = allCategoriesCD.compactMap { cd in
                 let id = cd.value(forKey: CategoryEnityKey.id.rawValue) as? Int ?? kNilHolderInt
                 
-                var parent: Int? = nil
-                if let value = cd.value(forKey: CategoryEnityKey.parentId.rawValue) as? Int {
-                    if value != kNilHolderInt {
-                        parent = value
-                    }
-                }
-                
-                var image: String? = nil
-                if let value = cd.value(forKey: CategoryEnityKey.imageUrl.rawValue) as? String {
-                    if value != kNilHolderString {
-                        image = value
-                    }
-                }
-                
-                var position: Int? = nil
-                if let value = cd.value(forKey: CategoryEnityKey.position.rawValue) as? Int {
-                    if value != kNilHolderInt {
-                        position = value
-                    }
-                }
-                
-                var title: String? = nil
-                if let value = cd.value(forKey: CategoryEnityKey.title.rawValue) as? String {
-                    if value != kNilHolderString {
-                        title = value
-                    }
-                }
-                
                 return Category(id: id,
-                                parentID: parent,
-                                imageURL: image,
-                                catalogPosition: position,
+                                parentID: tryReadInt(from: .parentId, in: cd),
+                                imageURL: tryReadString(from: .imageUrl, in: cd),
+                                catalogPosition: tryReadInt(from: .position, in: cd),
                                 size: nil,
-                                title: title)
+                                title: tryReadString(from: .title, in: cd))
             }.filter{ $0.id != kNilHolderInt }
             
             if categories.isEmpty { return nil }
@@ -132,6 +146,24 @@ struct CategoriesStorage {
             print("Error: Cloudn't load from cahce")
             return nil
         }
+    }
+    
+    private static func tryReadInt(from key: CategoryEnityKey, in object: NSManagedObject) -> Int? {
+        if let value = object.value(forKey: key.rawValue) as? Int {
+            if value != kNilHolderInt {
+                return value
+            }
+        }
+        return nil
+    }
+    
+    private static func tryReadString(from key: CategoryEnityKey, in object: NSManagedObject) -> String? {
+        if let value = object.value(forKey: key.rawValue) as? String {
+            if value != kNilHolderString {
+                return value
+            }
+        }
+        return nil
     }
     
     //MARK: - update
@@ -169,5 +201,22 @@ struct CategoriesStorage {
         let predicate = NSPredicate(format: "downloadedDate < %@", cacheExpDate as NSDate)
         
         delete(with: predicate)
+    }
+}
+
+
+
+extension NSManagedObjectContext {
+    func update() throws {
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.parent = self
+
+        context.perform({
+            do {
+                try context.save()
+            } catch {
+                print(error)
+            }
+        })
     }
 }

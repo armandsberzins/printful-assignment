@@ -9,4 +9,5 @@ import Foundation
 
 struct TagModel: Hashable {
     let title: String
+    let categoryId: Int
 }

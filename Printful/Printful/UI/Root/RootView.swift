@@ -11,12 +11,19 @@ struct RootView: View {
     @StateObject private var tabController = TabController()
     
     var body: some View {
-        TabView(selection: $tabController.activeTab) {
-            ProductsView()
-                .tag(Tab.home)
-                .tabItem {
-                    Label("Products", systemImage: "tshirt.fill")
-                }
-        }
+       // NavigationView {
+            TabView(selection: $tabController.activeTab) {
+                CategoriesView()
+                    .tag(Tab.home)
+                    .tabItem {
+                        Label("Categories", systemImage: "tshirt.fill")
+                    }
+                FavoritesView(categoryId: 7)
+                    .tag(Tab.favorites)
+                    .tabItem {
+                        Label("Favorites", systemImage: "star.fill")
+                    }
+            }
+      //  }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
