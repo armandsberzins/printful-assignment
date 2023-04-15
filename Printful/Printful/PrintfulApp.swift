@@ -8,10 +8,10 @@
 import SwiftUI
 
 @main
-struct PrintfulApp: App {   
+struct PrintfulApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            HomeView()
         }
     }
 }
