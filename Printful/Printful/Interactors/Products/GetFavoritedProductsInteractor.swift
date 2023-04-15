@@ -18,16 +18,6 @@ extension GetFavoritedProductsInteractor {
     }
 }
 
-protocol SelectFavoriteProductInteractor: Interactor, ProductsRepositoryProtocol {
-    func selectFavoriteProduct(for product: Product, networkManager: NetworkManager)
-}
-
-extension SelectFavoriteProductInteractor {
-    func selectFavoriteProduct(for product: Product, networkManager: NetworkManager = NetworkManager()) {
-        return setFavorite(for: product, networkManager: networkManager)
-    }
-}
-
 protocol RemoveFavoriteProductInteractor: Interactor, ProductsRepositoryProtocol {
     func removeFavoriteProduct(for product: Product, networkManager: NetworkManager)
 }

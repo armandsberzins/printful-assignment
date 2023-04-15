@@ -122,7 +122,7 @@ class CategoriesRepository: Repository {
             }
         }
     }
-    
+
     private func updateInBackground() {
         let successHandler: (CateogryResponse) throws -> Void = { successResponse in
             DispatchQueue.main.async {
