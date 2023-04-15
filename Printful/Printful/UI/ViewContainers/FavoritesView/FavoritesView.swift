@@ -1,17 +1,17 @@
 //
-//  ProductDetailView.swift
+//  FavoritesView.swift
 //  Printful
 //
-//  Created by Armands Berzins on 12/04/2023.
+//  Created by Armands Berzins on 14/04/2023.
 //
 
 import SwiftUI
 
-struct ProductsView: View {
+#warning("The same idea and functionalty as ProductsViewModel so have to handle reusability")
+struct FavoritesView: View {
     @StateObject var viewModel = ProductsViewModel()
     
     let categoryId: Int
-    let title: String
     
     var body: some View {
         NavigationStack {
@@ -19,15 +19,15 @@ struct ProductsView: View {
                 if viewModel.showLoading {
                     ProgressView()
                 } else {
-                    if (!viewModel.listContent.isEmpty) {
+                    if (!viewModel.favoritedContent.isEmpty) {
                         List {
-                            ForEach(viewModel.listContent) { item in
+                            ForEach(viewModel.favoritedContent) { item in
                                 let model = ProductRowModel(title: item.title ?? "",
                                                             isFavorite: item.isFavorite, favoriteAction: { viewModel.onFavoriteButtonPressed(product: item) },
                                                             product: item)
                                 ProductRowView(model: model)
                             }
-                        }
+                        }.animation(.default, value: viewModel.favoritedContent)
                     }
                 }
                 
@@ -37,11 +37,11 @@ struct ProductsView: View {
                     })
                 }
             }.onAppear() {
-                viewModel.set(pageType: .category(categoryId))
+                viewModel.set(pageType: .favorites)
             }.alert(
                 isPresented: $viewModel.showAlert,
                 content: { Alert(title: Text(viewModel.error?.description ?? "")) }
-            )
-        }.navigationBarTitle(title, displayMode: .large)
+            ).navigationBarTitle("Favorites", displayMode: .large)
+        }
     }
 }

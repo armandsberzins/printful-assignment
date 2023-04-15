@@ -36,8 +36,8 @@ class NetworkManager {
                            errorHandler: @escaping ErrorHandler) {
         let completionHandler: NetworkCompletionHandler = { (data, urlResponse, error) in
             if let error = error {
+                self.tryIdentifyError(data, errorHandler: errorHandler)
                 print(error.localizedDescription)
-                errorHandler(.serverError)
                 return
             }
             
@@ -50,12 +50,12 @@ class NetworkManager {
                     do {
                         try successHandler(responseObject)
                     } catch {
-                        errorHandler(.invalidData)
+                        self.tryIdentifyError(data, errorHandler: errorHandler)
                     }
                     return
                 }
             }
-            errorHandler(.invalidData)
+            self.tryIdentifyError(data, errorHandler: errorHandler)
         }
         
         if isNetworkAvaliable(reachabilityManager: ReachabilityManager()) {
@@ -69,5 +69,16 @@ class NetworkManager {
         } else {
             errorHandler(.noNetwork)
         }
+    }
+    
+    private func tryIdentifyError(_ data: Data?, errorHandler: @escaping ErrorHandler) {
+        guard let data = data else {
+            return errorHandler(.invalidData)
+        }
+        if let responseObject = try? JSONDecoder().decode(PrintfulErrorResponse.self, from: data) {
+            errorHandler(.printfulApi(errorText: responseObject.error.message))
+            return
+        }
+        errorHandler(.serverError)
     }
 }

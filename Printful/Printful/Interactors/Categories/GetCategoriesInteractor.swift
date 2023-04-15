@@ -9,11 +9,14 @@ import Combine
 import Foundation
 
 protocol GetCategoriesInteractor: Interactor, CategoriesRepositoryProtocol {
-    func getCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
+    func getCategories(forceFresh: Bool, networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
 }
 
 extension GetCategoriesInteractor {
-    func getCategories(networkManager: NetworkManager = NetworkManager()) -> Future<CateogryResult, ApiError> {
+    func getCategories(forceFresh: Bool, networkManager: NetworkManager = NetworkManager()) -> Future<CateogryResult, ApiError> {
+        if forceFresh {
+            return getFreshCategories(networkManager: networkManager)
+        }
         return getCachedOrFreshCategories(networkManager: networkManager)
     }
 }
