@@ -12,10 +12,13 @@ struct ProductRowView: View {
     
     var body: some View {
         HStack {
+            if let url = URL(string: model.imageUrl ?? "") {
+                ProductImage(url: url).frame(width: 80, height: 80)
+            }
             Text(verbatim: model.title)
                 .font(.system(.body, weight: .semibold))
                 .foregroundColor(.black)
-                .padding(8)
+                .padding(4)
             Spacer()
             if (model.isFavorite) {
                 Image(systemName: "star.fill")

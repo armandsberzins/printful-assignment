@@ -22,10 +22,12 @@ struct ProductsView: View {
                     if (!viewModel.listContent.isEmpty) {
                         List {
                             ForEach(viewModel.listContent) { item in
-                                let model = ProductRowModel(title: item.title ?? "",
-                                                            isFavorite: item.isFavorite, favoriteAction: { viewModel.onFavoriteButtonPressed(product: item) },
-                                                            product: item)
-                                ProductRowView(model: model)
+                                NavigationLink(destination: ProductDetailView(productId: item.id)) {
+                                    let model = ProductRowModel(productId: item.id, title: item.title ?? "", imageUrl: item.image,
+                                                                isFavorite: item.isFavorite, favoriteAction: { viewModel.onFavoriteButtonPressed(product: item) },
+                                                                product: item)
+                                    ProductRowView(model: model)
+                                }
                             }
                         }
                     }

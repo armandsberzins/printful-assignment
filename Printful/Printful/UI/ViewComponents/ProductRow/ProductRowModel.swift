@@ -9,18 +9,19 @@ import Foundation
 
 struct ProductRowModel: Hashable {
 
-    let id = UUID()
-    
+    let rowId = UUID()
+    let productId: Int
     let title: String
+    let imageUrl: String?
     let isFavorite: Bool
     let favoriteAction: () -> Void
     let product: Product
     
     public func hash(into hasher: inout Hasher) {
-        return hasher.combine(id)
+        return hasher.combine(rowId)
     }
     
     static func == (lhs: ProductRowModel, rhs: ProductRowModel) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.rowId == rhs.rowId
     }
 }

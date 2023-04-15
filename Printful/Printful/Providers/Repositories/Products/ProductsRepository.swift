@@ -15,6 +15,7 @@ protocol ProductsRepositoryProtocol {
     func getCachedFavorites(networkManager: NetworkManager) -> [Product]?
     func setFavorite(for product: Product, networkManager: NetworkManager)
     func unsetFavorite(for product: Product, networkManager: NetworkManager)
+    func getCachedOrFreshProduct(by productId: Int, networkManager: NetworkManager) -> Future<Product?, ApiError>
 }
 
 extension ProductsRepositoryProtocol where Self: Interactor {
@@ -46,6 +47,11 @@ extension ProductsRepositoryProtocol where Self: Interactor {
     func unsetFavorite(for product: Product, networkManager: NetworkManager) {
         let productsRepo = ProductsRepository(networkManager: networkManager)
         return productsRepo.setFavoriteStatus(product: product, value: false)
+    }
+    
+    func getCachedOrFreshProduct(by productId: Int, networkManager: NetworkManager) -> Future<Product?, ApiError> {
+        let productsRepo = ProductsRepository(networkManager: networkManager)
+        return productsRepo.getProduct(by: productId)
     }
 }
 
@@ -127,6 +133,34 @@ class ProductsRepository: Repository {
     fileprivate func setFavoriteStatus(product: Product, value: Bool) {
         ProductsStorage.updateFavorite(for: product, with: value)
     }
+    
+    
+    fileprivate func getProduct(by productId: Int) -> Future<Product?, ApiError> {
+        Future { promise in
+            
+            if let local = ProductsStorage.loadProduct(by: productId) {
+                promise(.success(local))
+            } else {
+                let successHandler: (ProductResponse) throws -> Void = { successResponse in
+                    DispatchQueue.main.async {
+                        ProductsStorage.save(successResponse.result)
+                        let filtered = ProductsStorage.loadProduct(by: productId)
+                        promise(.success(filtered))
+                    }
+                }
+                
+                let errorHandler: (ApiError) -> Void = { networkManagerError in
+                    print(networkManagerError.description)
+                    promise(.failure(networkManagerError))
+                }
+                
+                self.networkManager.get(urlString: self.url,
+                                        successHandler: successHandler,
+                                        errorHandler: errorHandler)
+            }
+        }
+    }
+    
     
     fileprivate func updateInBackground() {
         

@@ -93,6 +93,17 @@ struct ProductsStorage {
         return getFromDataBase(with: predicate)
     }
     
+    static func loadProduct(by productId: Int) -> Product? {
+        let preicate = NSPredicate(format: "id = %ld", productId)
+        if let productArray = getFromDataBase(with: preicate) {
+            if productArray.isEmpty { return nil }
+            if productArray.count == 1 {
+                return productArray.first
+            }
+        }
+        return nil
+    }
+    
     private static func tryReadString(from key: ProductEnityKey, in object: NSManagedObject) -> String? {
         if let value = object.value(forKey: key.rawValue) as? String {
             if value != kNilHolderString {
