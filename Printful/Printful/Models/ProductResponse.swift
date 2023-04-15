@@ -13,8 +13,8 @@ struct ProductResponse: Codable {
     let result: [Product]
 }
 
-// MARK: - ProductResult
-struct Product: Codable, Identifiable {
+// MARK: - Product
+struct Product: Codable, Identifiable, Hashable {
     let id, mainCategoryID: Int
     let type, description, typeName, title: String?
     let brand: String?
@@ -43,6 +43,14 @@ struct Product: Codable, Identifiable {
         case avgFulfillmentTime = "avg_fulfillment_time"
         case techniques, files
         case originCountry = "origin_country"
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
+    
+    static func == (lhs: Product, rhs: Product) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

@@ -113,7 +113,12 @@ class ProductsViewModel: ObservableObject,
     //MARK: - react on user action
     
     func onFavoriteButtonPressed(product: Product) {
-        selectFavoriteProduct(for: product)
+        if product.isFavorite {
+            removeFavoriteProduct(for: product)
+        } else {
+            selectFavoriteProduct(for: product)
+        }
+        loadProducts()
         self.favoritedContent = getFavoriteProducts() ?? []
     }
     

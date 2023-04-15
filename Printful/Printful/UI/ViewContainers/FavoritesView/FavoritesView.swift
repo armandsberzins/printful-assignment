@@ -22,7 +22,10 @@ struct FavoritesView: View {
                     if (!viewModel.favoritedContent.isEmpty) {
                         List {
                             ForEach(viewModel.favoritedContent) { item in
-                                Text(item.title ?? "")
+                                let model = ProductRowModel(title: item.title ?? "",
+                                                            isFavorite: item.isFavorite, favoriteAction: { viewModel.onFavoriteButtonPressed(product: item) },
+                                                            product: item)
+                                ProductRowView(model: model)
                             }
                         }
                     }
