@@ -27,7 +27,7 @@ struct FavoritesView: View {
                                                             product: item)
                                 ProductRowView(model: model)
                             }
-                        }
+                        }.animation(.default, value: viewModel.favoritedContent)
                     }
                 }
                 

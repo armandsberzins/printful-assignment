@@ -117,6 +117,7 @@ extension CategoriesView {
         
         func onRefreshButtonPressed() {
             loadGrouppedCategories(force: true)
+            updateProductsCache()
         }
         
         //MARK: - deinit

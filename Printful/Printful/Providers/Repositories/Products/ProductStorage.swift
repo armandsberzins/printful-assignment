@@ -196,13 +196,9 @@ struct ProductsStorage {
     }
     
     static func deleteOutdated() {
-
         let cal = Calendar.current
-
         guard let cacheExpDate = cal.date(byAdding: .minute, value: -1*kCacheTimeInMinutes, to: Date.now) else { return }
-        
         let predicate = NSPredicate(format: "downloadedDate < %@", cacheExpDate as NSDate)
-        
         delete(with: predicate)
     }
 }

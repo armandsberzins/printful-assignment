@@ -61,9 +61,7 @@ class ProductsRepository: Repository {
     
     fileprivate func get() -> Future<[Product], ApiError> {
         Future { promise in
-            
-            ProductsStorage.deleteOutdated()
-            
+
             if let local = ProductsStorage.loadAll() {
                 /** If data are stored already show them immediately and update in background
                  since these are not critcal time sensitive data
@@ -93,8 +91,6 @@ class ProductsRepository: Repository {
     
     fileprivate func get(for category: Int) -> Future<[Product]?, ApiError> {
         Future { promise in
-            
-            ProductsStorage.deleteOutdated()
             
             if let local = ProductsStorage.load(for: category) {
                 /** If data are stored already show them immediately and update in background
@@ -133,6 +129,7 @@ class ProductsRepository: Repository {
     }
     
     fileprivate func updateInBackground() {
+        
         let successHandler: (ProductResponse) throws -> Void = { successResponse in
             DispatchQueue.main.async {
                 ProductsStorage.save(successResponse.result)
