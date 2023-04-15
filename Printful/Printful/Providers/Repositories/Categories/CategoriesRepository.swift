@@ -10,18 +10,29 @@ import Foundation
 
 protocol CategoriesRepositoryProtocol {
     func getCachedOrFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
+    func getFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
     func getCachedOrFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<[Int: [Category]]?, ApiError>
 }
 
 extension CategoriesRepositoryProtocol where Self: Interactor {
     func getCachedOrFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError> {
         let categoriesRepo = CategoriesRepository(networkManager: networkManager)
-        return categoriesRepo.get()
+        return categoriesRepo.get(mandatoryDownload: false)
+    }
+    
+    func getFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError> {
+        let categoriesRepo = CategoriesRepository(networkManager: networkManager)
+        return categoriesRepo.get(mandatoryDownload: true)
     }
     
     func getCachedOrFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<[Int: [Category]]?, ApiError> {
         let categoriesRepo = CategoriesRepository(networkManager: networkManager)
-        return categoriesRepo.getCategoriesGroupedByParent()
+        return categoriesRepo.getCategoriesGroupedByParent(mandatoryDownload: false)
+    }
+    
+    func getFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<[Int: [Category]]?, ApiError> {
+        let categoriesRepo = CategoriesRepository(networkManager: networkManager)
+        return categoriesRepo.getCategoriesGroupedByParent(mandatoryDownload: true)
     }
 }
 
@@ -35,12 +46,17 @@ class CategoriesRepository: Repository {
         self.networkManager = networkManager
     }
 
-    fileprivate func get() -> Future<CateogryResult, ApiError> {
+    fileprivate func get(mandatoryDownload: Bool) -> Future<CateogryResult, ApiError> {
         Future { promise in
             
             CategoriesStorage.deleteOutdated()
             
-            if let local = CategoriesStorage.load() {
+            var localData: CateogryResult? = nil
+            if !mandatoryDownload {
+                localData = CategoriesStorage.load()
+            }
+            
+            if let local = localData {
                 /** If data are stored already show them immediately and update in background
                  since these are not critcal time sensitive data
                  */
@@ -67,12 +83,19 @@ class CategoriesRepository: Repository {
         }
     }
     
-    fileprivate func getCategoriesGroupedByParent() -> Future<[Int: [Category]]?, ApiError> {
+    #warning("Typalias success response")
+    
+    fileprivate func getCategoriesGroupedByParent(mandatoryDownload: Bool) -> Future<[Int: [Category]]?, ApiError> {
         Future { promise in
             
             CategoriesStorage.deleteOutdated()
             
-            if let local = CategoriesStorage.loadCategoriesGroupedByParentId() {
+            var localData: [Int: [Category]]? = nil
+            if !mandatoryDownload {
+                localData = CategoriesStorage.loadCategoriesGroupedByParentId()
+            }
+            
+            if let local = localData {
                 /** If data are stored already show them immediately and update in background
                  since these are not critcal time sensitive data
                  */

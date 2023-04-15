@@ -48,11 +48,14 @@ struct CategoriesView: View {
                 
                 if viewModel.error != nil {
                     Button("Try again load categories", action: {
-                        viewModel.loadCategories()
+                        viewModel.onRefreshButtonPressed()
                     })
                 }
                 
-            }.alert(
+            }.refreshable {
+                viewModel.onRefreshButtonPressed()
+            }
+            .alert(
                 isPresented: $viewModel.showAlert,
                 content: { Alert(title: Text(viewModel.error?.description ?? "")) }
             ).navigationBarTitle("Categories", displayMode: .large)

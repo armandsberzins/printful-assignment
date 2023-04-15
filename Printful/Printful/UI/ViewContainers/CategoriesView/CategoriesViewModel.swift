@@ -35,10 +35,10 @@ extension CategoriesView {
         
         //MARK: - setup
         init() {
-       //     loadCategories()
+            loadGrouppedCategories(force: false)
             updateProductsCache()
             
-            cancelable = getGrouppedCategories()
+            cancelable = getGrouppedCategories(forceFresh: false)
                 .subscribe(on: Self.categoriesQueue)
                 .receive(on: DispatchQueue.main)
                 .sink(
@@ -51,17 +51,18 @@ extension CategoriesView {
                 )
         }
         
-        func loadCategories() {
+        private func loadGrouppedCategories(force: Bool) {
             showLoading = true
-            cancelable = getCategories()
+            
+            cancelable = getGrouppedCategories(forceFresh: force)
                 .subscribe(on: Self.categoriesQueue)
                 .receive(on: DispatchQueue.main)
                 .sink(
                     receiveCompletion: { completion in
                         self.handle(completion)
                     },
-                    receiveValue: {
-                        self.handle($0.categories)
+                    receiveValue: { categoriesByParentDic in
+                        self.handle(categoriesByParentDic)
                     }
                 )
         }
@@ -113,6 +114,10 @@ extension CategoriesView {
                 }
         }
         //MARK: - react on user action
+        
+        func onRefreshButtonPressed() {
+            loadGrouppedCategories(force: true)
+        }
         
         //MARK: - deinit
         deinit {
