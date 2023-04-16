@@ -49,10 +49,15 @@ class ProductsRepository {
         }
     }
     
-    func get(for category: Int) -> Future<[Product]?, ApiError> {
+    func get(for category: Int, mandatoryDownload: Bool = false) -> Future<[Product]?, ApiError> {
         Future { promise in
             
-            if let local = ProductsStorage.load(for: category) {
+            var localData: [Product]? = nil
+            if !mandatoryDownload {
+                localData = ProductsStorage.load(for: category)
+            }
+            
+            if let local = localData {
                 promise(.success(local))
                 self.updateInBackground()
             } else {

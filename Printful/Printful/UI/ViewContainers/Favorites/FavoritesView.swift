@@ -26,7 +26,10 @@ struct FavoritesView: View {
                 }
             }.onAppear {
                 viewModel.onAppear()
-            }.navigationBarTitle("Favorites", displayMode: .large)
+            }.refreshable {
+                viewModel.reload()
+            }
+            .navigationBarTitle("Favorites", displayMode: .large)
         }
     }
 }

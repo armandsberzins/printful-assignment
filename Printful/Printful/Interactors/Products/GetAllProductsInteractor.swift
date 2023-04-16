@@ -10,7 +10,7 @@ import Foundation
 
 protocol GetProductsInteractor {
     func getAll() -> Future<[Product], ApiError>
-    func getFor(category: Int) -> Future<[Product]?, ApiError>
+    func getFor(category: Int, forceReload: Bool) -> Future<[Product]?, ApiError>
     func getBy(productId: Int) -> Future<Product?, ApiError>
 }
 
@@ -19,8 +19,8 @@ class GetProductsInteractorImpementation: GetProductsInteractor {
         return repository.get()
     }
     
-    func getFor(category: Int) -> Future<[Product]?, ApiError> {
-        return repository.get(for: category)
+    func getFor(category: Int, forceReload: Bool = false) -> Future<[Product]?, ApiError> {
+        return repository.get(for: category, mandatoryDownload: forceReload)
     }
     
     func getBy(productId: Int) -> Future<Product?, ApiError> {

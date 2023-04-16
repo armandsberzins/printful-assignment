@@ -25,18 +25,20 @@ struct ProductsView: View {
                 } else {
                     if (!viewModel.listContent.isEmpty) {
                         ProductList(products: viewModel.listContent,
-                                    onFavoriteChanged: { viewModel.reload() }
+                                    onFavoriteChanged: { viewModel.onFavoritePressed() }
                         )
                     }
                 }
                 
                 if viewModel.error != nil {
                     Button("Try again load products", action: {
-                        viewModel.reload()
+                        viewModel.onRetryError()
                     })
                 }
             }.onAppear {
                 viewModel.onAppear()
+            }.refreshable {
+                viewModel.onPullToRefresh()
             }
             .alert(
             isPresented: $viewModel.showAlert,

@@ -35,26 +35,13 @@ extension ProductsView {
             self.categoryId = categoryId
             self.favoriteProductsInteractor = FavoriteProductsInteractorImpementation()
             self.getProductsInteractor = GetProductsInteractorImpementation()
-           // loadProducts(categoryId: categoryId)
-            loadProducts(categoryId)
-            //self.favoritedContent = favoriteProductsInteractor.getFavorites() ?? []
-            //updateProductsCache()
+            showLoading = true
+            loadProducts(categoryId, force: false)
         }
         
-//        func set(pageType: ProductsPageType) {
-//            switch pageType {
-//            case .category(let catId): categoryId = catId
-//            case.favorites: categoryId = 7
-//            }
-//            loadProducts()
-//            self.favoritedContent = favoriteProductsInteractor.getFavorites() ?? []
-//        }
-        
-        private func loadProducts(_ categoryId: Int) {
+        private func loadProducts(_ categoryId: Int, force: Bool = false) {
             error = nil
-
-            showLoading = true
-            cancelable = getProductsInteractor.getFor(category: categoryId)
+            cancelable = getProductsInteractor.getFor(category: categoryId, forceReload: force)
                 .subscribe(on: Self.productsQueue)
                 .receive(on: DispatchQueue.main)
                 .sink(
@@ -96,14 +83,26 @@ extension ProductsView {
             self.showAlert = self.error != nil
         }
         
+        private func reload(force: Bool) {
+            loadProducts(self.categoryId)
+        }
+        
         //MARK: - lifecycle
         func onAppear() {
-            reload()
+            reload(force: false)
         }
         
         //MARK: - react on user action
-        func reload() {
-            loadProducts(self.categoryId)
+        func onPullToRefresh() {
+            reload(force: true)
+        }
+        
+        func onRetryError() {
+            reload(force: true)
+        }
+        
+        func onFavoritePressed() {
+            reload(force: false)
         }
         
         //MARK: - deinit
