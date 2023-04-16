@@ -10,37 +10,8 @@ import Foundation
 
 /**
  This repository retrurns categories.
- Reaching data is possible ony with protocols.
  Be aware that data might be cached.
  */
-
-protocol CategoriesRepositoryProtocol {
-    func getCachedOrFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
-    func getFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
-    func getCachedOrFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<CategoriesByParent?, ApiError>
-}
-
-extension CategoriesRepositoryProtocol where Self: Interactor {
-    func getCachedOrFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError> {
-        let categoriesRepo = CategoriesRepository(networkManager: networkManager)
-        return categoriesRepo.get(mandatoryDownload: false)
-    }
-    
-    func getFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError> {
-        let categoriesRepo = CategoriesRepository(networkManager: networkManager)
-        return categoriesRepo.get(mandatoryDownload: true)
-    }
-    
-    func getCachedOrFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<CategoriesByParent?, ApiError> {
-        let categoriesRepo = CategoriesRepository(networkManager: networkManager)
-        return categoriesRepo.getCategoriesGroupedByParent(mandatoryDownload: false)
-    }
-    
-    func getFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<CategoriesByParent?, ApiError> {
-        let categoriesRepo = CategoriesRepository(networkManager: networkManager)
-        return categoriesRepo.getCategoriesGroupedByParent(mandatoryDownload: true)
-    }
-}
 
 typealias CategoriesByParent = [Int: [Category]]
 
@@ -54,7 +25,7 @@ class CategoriesRepository: Repository {
         self.networkManager = networkManager
     }
 
-    fileprivate func get(mandatoryDownload: Bool) -> Future<CateogryResult, ApiError> {
+    func get(mandatoryDownload: Bool) -> Future<CateogryResult, ApiError> {
         Future { promise in
             
             CategoriesStorage.deleteOutdated()
@@ -87,7 +58,7 @@ class CategoriesRepository: Repository {
         }
     }
 
-    fileprivate func getCategoriesGroupedByParent(mandatoryDownload: Bool) -> Future<CategoriesByParent?, ApiError> {
+    func getCategoriesGroupedByParent(mandatoryDownload: Bool) -> Future<CategoriesByParent?, ApiError> {
         Future { promise in
             
             CategoriesStorage.deleteOutdated()

@@ -10,13 +10,10 @@ import Foundation
 
 /**
  This repository retrurns data of products.
- Reaching data is possible ony with protocols.
  Be aware that data might be cached.
  */
 
 protocol ProductsRepositoryProtocol {
-    func getCachedOrFreshProducts(networkManager: NetworkManager) -> Future<[Product], ApiError>
-    func getCachedOrFreshProducts(for category: Int, networkManager: NetworkManager) -> Future<[Product]?, ApiError>
     func refreshProducts(networkManager: NetworkManager)
     func getCachedFavorites(networkManager: NetworkManager) -> [Product]?
     func setFavorite(for product: Product, networkManager: NetworkManager)
@@ -25,15 +22,6 @@ protocol ProductsRepositoryProtocol {
 }
 
 extension ProductsRepositoryProtocol where Self: Interactor {
-    func getCachedOrFreshProducts(networkManager: NetworkManager) -> Future<[Product], ApiError> {
-        let productsRepo = ProductsRepository(networkManager: networkManager)
-        return productsRepo.get()
-    }
-    
-    func getCachedOrFreshProducts(for category: Int, networkManager: NetworkManager) -> Future<[Product]?, ApiError> {
-        let productsRepo = ProductsRepository(networkManager: networkManager)
-        return productsRepo.get(for: category)
-    }
     
     func refreshProducts(networkManager: NetworkManager) {
         let productsRepo = ProductsRepository(networkManager: networkManager)
@@ -71,7 +59,7 @@ class ProductsRepository: Repository {
         self.networkManager = networkManager
     }
     
-    fileprivate func get() -> Future<[Product], ApiError> {
+    func get() -> Future<[Product], ApiError> {
         Future { promise in
 
             if let local = ProductsStorage.loadAll() {
@@ -97,7 +85,7 @@ class ProductsRepository: Repository {
         }
     }
     
-    fileprivate func get(for category: Int) -> Future<[Product]?, ApiError> {
+    func get(for category: Int) -> Future<[Product]?, ApiError> {
         Future { promise in
             
             if let local = ProductsStorage.load(for: category) {
@@ -124,15 +112,15 @@ class ProductsRepository: Repository {
         }
     }
     
-    fileprivate func getFavorites() -> [Product]? {
+    func getFavorites() -> [Product]? {
         return ProductsStorage.loadFavorites()
     }
     
-    fileprivate func setFavoriteStatus(product: Product, value: Bool) {
+    func setFavoriteStatus(product: Product, value: Bool) {
         ProductsStorage.updateFavorite(for: product, with: value)
     }
     
-    fileprivate func getProduct(by productId: Int) -> Future<Product?, ApiError> {
+    func getProduct(by productId: Int) -> Future<Product?, ApiError> {
         Future { promise in
             
             if let local = ProductsStorage.loadProduct(by: productId) {
@@ -158,8 +146,7 @@ class ProductsRepository: Repository {
         }
     }
     
-    
-    fileprivate func updateInBackground() {
+    func updateInBackground() {
         let successHandler: (ProductResponse) throws -> Void = { successResponse in
             DispatchQueue.main.async {
                 ProductsStorage.save(successResponse.result)

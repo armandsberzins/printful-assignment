@@ -8,12 +8,28 @@
 import Combine
 import Foundation
 
-protocol GetAllProductsInteractor: Interactor, ProductsRepositoryProtocol {
-    func getAllProducts(networkManager: NetworkManager) -> Future<[Product], ApiError>
+protocol GetProductsInteractor: Interactor {
+    func getAll() -> Future<[Product], ApiError>
+    func getFor(category: Int) -> Future<[Product]?, ApiError>
+    func getBy(productId: Int) -> Future<Product?, ApiError>
 }
 
-extension GetAllProductsInteractor {
-    func getAllProducts(networkManager: NetworkManager = NetworkManager()) -> Future<[Product], ApiError> {
-        return getCachedOrFreshProducts(networkManager: networkManager)
+class GetProductsInteractorImpementation: GetProductsInteractor {
+    func getAll() -> Future<[Product], ApiError> {
+        return repository.get()
+    }
+    
+    func getFor(category: Int) -> Future<[Product]?, ApiError> {
+        return repository.get(for: category)
+    }
+    
+    func getBy(productId: Int) -> Future<Product?, ApiError> {
+        return repository.getProduct(by: productId)
+    }
+    
+    private let repository: ProductsRepository
+    
+    init() {
+        self.repository = ProductsRepository(networkManager: NetworkManager())
     }
 }

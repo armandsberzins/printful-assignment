@@ -9,16 +9,13 @@ import CoreData
 import Combine
 import Foundation
 
-#warning("Refactor interactors to classes to limit access to repositories")
-
 extension CategoriesView {
     @MainActor
-    class CategoriesViewModel: ObservableObject,
-                             GetCategoriesInteractor,
-                               GetGrouppedCategoriesInteractor,
-                               RefreshProductsCacheInteractor {
+    class CategoriesViewModel: ObservableObject {
         
         //MARK: - dependencies
+        private let grouppedCategoriesInteractor: GrouppedCategoriesInteractor
+        private let refreshProductsInteractor: RefreshProductsCacheInteractor
         
         //MARK: - outlets
         @Published var gridContent: [TagModel] = []
@@ -35,26 +32,16 @@ extension CategoriesView {
         
         //MARK: - setup
         init() {
+            self.grouppedCategoriesInteractor = GrouppedCategoriesInteractorImpementation()
+            self.refreshProductsInteractor = RefreshProductsCacheInteractorImpementation()
             loadGrouppedCategories(force: false)
             updateProductsCache()
-            
-            cancelable = getGrouppedCategories(forceFresh: false)
-                .subscribe(on: Self.categoriesQueue)
-                .receive(on: DispatchQueue.main)
-                .sink(
-                    receiveCompletion: { completion in
-                        self.handle(completion)
-                    },
-                    receiveValue: { categoriesByParentDic in
-                        self.handle(categoriesByParentDic)
-                    }
-                )
         }
         
         private func loadGrouppedCategories(force: Bool) {
             showLoading = true
             
-            cancelable = getGrouppedCategories(forceFresh: force)
+            cancelable = grouppedCategoriesInteractor.get(forceFresh: force)
                 .subscribe(on: Self.categoriesQueue)
                 .receive(on: DispatchQueue.main)
                 .sink(
@@ -68,7 +55,7 @@ extension CategoriesView {
         }
         
         private func updateProductsCache() {
-            refreshProductsCache()
+            refreshProductsInteractor.updateCache()
         }
         
         //MARK: - lifecycle

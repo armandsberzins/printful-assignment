@@ -9,15 +9,11 @@ import CoreData
 import Combine
 import Foundation
 
-#warning("Refactor interactors to classes to limit access to repositories")
-
 @MainActor
-class ProductsViewModel: ObservableObject,
-                         GetProductsForCategoryInteractor,
-                         SelectFavoriteProductInteractor,
-                         RemoveFavoriteProductInteractor,
-                         GetFavoritedProductsInteractor {
+class ProductsViewModel: ObservableObject {
     //MARK: - dependencies
+    private let favoriteProductsInteractor: FavoriteProductsInteractor
+    private let getProductsInteractor: GetProductsInteractor
     
     //MARK: - outlets
     @Published var listContent: [Product] = []
@@ -37,6 +33,8 @@ class ProductsViewModel: ObservableObject,
     
     //MARK: - setup
     init() {
+        self.favoriteProductsInteractor = FavoriteProductsInteractorImpementation()
+        self.getProductsInteractor = GetProductsInteractorImpementation()
         //loadProducts()
         //updateProductsCache()
     }
@@ -47,7 +45,7 @@ class ProductsViewModel: ObservableObject,
         case.favorites: categoryId = 7
         }
         loadProducts()
-        favoritedContent = getFavoriteProducts() ?? []
+        self.favoritedContent = favoriteProductsInteractor.getFavorites() ?? []
     }
     
     func loadProducts() {
@@ -57,7 +55,7 @@ class ProductsViewModel: ObservableObject,
             return
         }
         showLoading = true
-        cancelable = getProducts(for: catId)
+        cancelable = getProductsInteractor.getFor(category: catId)
             .subscribe(on: Self.productsQueue)
             .receive(on: DispatchQueue.main)
             .sink(
@@ -69,12 +67,6 @@ class ProductsViewModel: ObservableObject,
                 }
             )
     }
-    
-    //func get
-    
-//    private func setupTitle() {
-//        viewTitle = "abc"
-//    }
     
     //MARK: - lifecycle
     
@@ -114,12 +106,16 @@ class ProductsViewModel: ObservableObject,
     
     func onFavoriteButtonPressed(product: Product) {
         if product.isFavorite {
-            removeFavoriteProduct(for: product)
+            favoriteProductsInteractor.removeFavorite(for: product)
         } else {
-            selectFavoriteProduct(for: product)
+            favoriteProductsInteractor.addFavorite(for: product)
         }
+        reload()
+    }
+    
+    private func reload() {
         loadProducts()
-        self.favoritedContent = getFavoriteProducts() ?? []
+        self.favoritedContent = favoriteProductsInteractor.getFavorites() ?? []
     }
     
     //MARK: - deinit
