@@ -5,14 +5,13 @@
 //  Created by Armands Berzins on 16/04/2023.
 //
 
-import Foundation
 import SwiftUI
 
 struct ProductImage: View {
     let url: URL
     
     var body: some View {
-        CacheAsyncImage(url: url) { phase in
+        AsyncImage(url: url) { phase in
             if let image = phase.image {
                 image.resizable()
                     .aspectRatio(contentMode: .fit)
@@ -24,7 +23,11 @@ struct ProductImage: View {
                         )
                     .padding(.horizontal, 8)
             } else if phase.error != nil {
-                Text("Image unavaliable")
+                VStack {
+                    Image(systemName: "xmark.square.fill")
+                        .padding(.bottom, 1)
+                    Text("No Image")
+                }.font(.caption)
             } else {
                 ProgressView()
             }

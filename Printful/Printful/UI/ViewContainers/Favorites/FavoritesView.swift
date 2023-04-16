@@ -21,7 +21,7 @@ struct FavoritesView: View {
                     Text(verbatim: "😌  \n\nSeems like you don't have any favorite yet. \n\nJust browse our products catalog and press ⭐️ to add it to your list \n\n🐰")
                         .font(.system(.body, weight: .semibold))
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
+                        .foregroundColor(.textColor)
                         .padding(20)
                 }
             }.onAppear {

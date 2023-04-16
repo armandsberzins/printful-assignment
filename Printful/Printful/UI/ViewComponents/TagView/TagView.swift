@@ -12,12 +12,12 @@ struct TagView: View {
     
     var body: some View {
         Text(verbatim: model.title)
-            .font(.system(.body, weight: .semibold))
-            .foregroundColor(.black)
+            .font(.system(.body, weight: .medium))
+            .foregroundColor(.textColor)
             .padding(8)
             .background(
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.gray.opacity(0.1))
+                    .fill(Color.tagBackgroundColor)
             )
     }
 }
