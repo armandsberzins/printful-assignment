@@ -58,10 +58,6 @@ extension CategoriesView {
             refreshProductsInteractor.updateCache()
         }
         
-        //MARK: - lifecycle
-        
-        //MARK: - update data
-        
         //MARK: - react on data change
         
         private func handle(_ categories: [Category]) {

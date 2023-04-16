@@ -15,7 +15,7 @@ import Foundation
 
 typealias CategoriesByParent = [Int: [Category]]
 
-class CategoriesRepository: Repository {
+class CategoriesRepository {
     
     private let url = Constants.URL.apiWith(path: "categories")
     

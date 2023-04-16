@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol GrouppedCategoriesInteractor: Interactor {
+protocol GrouppedCategoriesInteractor {
     func get(forceFresh: Bool) -> Future<CategoriesByParent?, ApiError>
 }
 

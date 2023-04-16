@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol GetCategoriesInteractor: Interactor {
+protocol GetCategoriesInteractor {
     func get(forceFresh: Bool) -> Future<CateogryResult, ApiError>
 }
 

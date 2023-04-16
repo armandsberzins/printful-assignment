@@ -12,27 +12,33 @@ struct ProductRowView: View {
     
     var body: some View {
         HStack {
-            if let url = URL(string: model.imageUrl ?? "") {
+            if let url = URL(string: model.product.image ?? "") {
                 ProductImage(url: url).frame(width: 80, height: 80)
             }
-            Text(verbatim: model.title)
-                .font(.system(.body, weight: .semibold))
-                .foregroundColor(.black)
-                .padding(4)
-            Spacer()
-            if (model.isFavorite) {
-                Image(systemName: "star.fill")
-                    .foregroundColor(.accentColor)
-                    .onTapGesture {
-                        model.favoriteAction()
-                    }
-                
-            } else {
-                Image(systemName: "star")
+            
+            if let title = model.product.title {
+                Text(verbatim: title)
+                    .font(.system(.body, weight: .semibold))
                     .foregroundColor(.black)
-                    .onTapGesture {
-                        model.favoriteAction()
-                    }
+                    .padding(4)
+                Spacer()
+            }
+
+            if let favoritingAction = model.favoriteAction {
+                if (model.product.isFavorite) {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.accentColor)
+                        .onTapGesture {
+                            favoritingAction()
+                        }
+                    
+                } else {
+                    Image(systemName: "star")
+                        .foregroundColor(.black)
+                        .onTapGesture {
+                            favoritingAction()
+                        }
+                }
             }
         }
     }

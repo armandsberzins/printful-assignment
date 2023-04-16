@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol GetProductsInteractor: Interactor {
+protocol GetProductsInteractor {
     func getAll() -> Future<[Product], ApiError>
     func getFor(category: Int) -> Future<[Product]?, ApiError>
     func getBy(productId: Int) -> Future<Product?, ApiError>

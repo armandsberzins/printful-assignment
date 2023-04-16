@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct ProductsView: View {
-    @StateObject var viewModel = ProductsViewModel()
+    @StateObject var viewModel: ProductsViewModel
     
-    let categoryId: Int
     let title: String
+    
+    init(categoryId: Int, title: String) {
+        self.title = title
+        _viewModel = StateObject(wrappedValue: ProductsViewModel(categoryId: categoryId))
+    }
     
     var body: some View {
         NavigationStack {
@@ -20,29 +24,23 @@ struct ProductsView: View {
                     ProgressView()
                 } else {
                     if (!viewModel.listContent.isEmpty) {
-                        List {
-                            ForEach(viewModel.listContent) { item in
-                                NavigationLink(destination: ProductDetailView(productId: item.id)) {
-                                    let model = ProductRowModel(productId: item.id, title: item.title ?? "", imageUrl: item.image,
-                                                                isFavorite: item.isFavorite, favoriteAction: { viewModel.onFavoriteButtonPressed(product: item) },
-                                                                product: item)
-                                    ProductRowView(model: model)
-                                }
-                            }
-                        }
+                        ProductList(products: viewModel.listContent,
+                                    onFavoriteChanged: { viewModel.reload() }
+                        )
                     }
                 }
                 
                 if viewModel.error != nil {
                     Button("Try again load products", action: {
-                        viewModel.loadProducts()
+                        viewModel.reload()
                     })
                 }
-            }.onAppear() {
-                viewModel.set(pageType: .category(categoryId))
-            }.alert(
-                isPresented: $viewModel.showAlert,
-                content: { Alert(title: Text(viewModel.error?.description ?? "")) }
+            }.onAppear {
+                viewModel.onAppear()
+            }
+            .alert(
+            isPresented: $viewModel.showAlert,
+            content: { Alert(title: Text(viewModel.error?.description ?? "")) }
             )
         }.navigationBarTitle(title, displayMode: .large)
     }

@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol FavoriteProductsInteractor: Interactor {
+protocol FavoriteProductsInteractor {
     func getFavorites() -> [Product]?
     func removeFavorite(for product: Product)
     func addFavorite(for product: Product)

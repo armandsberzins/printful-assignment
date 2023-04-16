@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RefreshProductsCacheInteractor: Interactor {
+protocol RefreshProductsCacheInteractor {
     func updateCache()
 }
 

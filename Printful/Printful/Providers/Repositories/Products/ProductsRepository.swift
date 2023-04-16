@@ -13,43 +13,7 @@ import Foundation
  Be aware that data might be cached.
  */
 
-protocol ProductsRepositoryProtocol {
-    func refreshProducts(networkManager: NetworkManager)
-    func getCachedFavorites(networkManager: NetworkManager) -> [Product]?
-    func setFavorite(for product: Product, networkManager: NetworkManager)
-    func unsetFavorite(for product: Product, networkManager: NetworkManager)
-    func getCachedOrFreshProduct(by productId: Int, networkManager: NetworkManager) -> Future<Product?, ApiError>
-}
-
-extension ProductsRepositoryProtocol where Self: Interactor {
-    
-    func refreshProducts(networkManager: NetworkManager) {
-        let productsRepo = ProductsRepository(networkManager: networkManager)
-        productsRepo.updateInBackground()
-    }
-    
-    func getCachedFavorites(networkManager: NetworkManager) -> [Product]? {
-        let productsRepo = ProductsRepository(networkManager: networkManager)
-        return productsRepo.getFavorites()
-    }
-    
-    func setFavorite(for product: Product, networkManager: NetworkManager) {
-        let productsRepo = ProductsRepository(networkManager: networkManager)
-        return productsRepo.setFavoriteStatus(product: product, value: true)
-    }
-    
-    func unsetFavorite(for product: Product, networkManager: NetworkManager) {
-        let productsRepo = ProductsRepository(networkManager: networkManager)
-        return productsRepo.setFavoriteStatus(product: product, value: false)
-    }
-    
-    func getCachedOrFreshProduct(by productId: Int, networkManager: NetworkManager) -> Future<Product?, ApiError> {
-        let productsRepo = ProductsRepository(networkManager: networkManager)
-        return productsRepo.getProduct(by: productId)
-    }
-}
-
-class ProductsRepository: Repository {
+class ProductsRepository {
     
     private let url = Constants.URL.apiWith(path: "products")
     
