@@ -26,10 +26,7 @@ struct CategoriesStorage {
     
     private static let kNilHolderInt = -999
     private static let kNilHolderString = "NULLNULL"
-    
-#warning("Protocolize this Cache")
-#warning("Limit who can use this Cache and what can use Cache")
-    
+
     //MARK: - create
     static func save(_ result: CateogryResult) {
         
@@ -52,7 +49,6 @@ struct CategoriesStorage {
             
             do {
                 try coreDataManager.managedObjectContext.save()
-                // try coreDataManager.managedObjectContext.update()
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
             }
@@ -90,8 +86,8 @@ struct CategoriesStorage {
         return nil
     }
     
-    static func loadCategoriesGroupedByParentId() -> [Int: [Category]]? {
-        let groupedCategories = getParentIds().reduce(into: [Int: [Category]]()) {
+    static func loadCategoriesGroupedByParentId() -> CategoriesByParent? {
+        let groupedCategories = getParentIds().reduce(into: CategoriesByParent()) {
             let predicate = NSPredicate(format: "parentId = %ld", $1)
             let categories: [Category] = getFromDataBase(with: predicate)?.categories ?? []
             return $0[$1] = categories
@@ -201,22 +197,5 @@ struct CategoriesStorage {
         let predicate = NSPredicate(format: "downloadedDate < %@", cacheExpDate as NSDate)
         
         delete(with: predicate)
-    }
-}
-
-
-
-extension NSManagedObjectContext {
-    func update() throws {
-        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        context.parent = self
-
-        context.perform({
-            do {
-                try context.save()
-            } catch {
-                print(error)
-            }
-        })
     }
 }

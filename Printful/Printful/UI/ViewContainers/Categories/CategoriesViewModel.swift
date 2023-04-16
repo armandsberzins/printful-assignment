@@ -82,7 +82,7 @@ extension CategoriesView {
             self.gridContent = convertToTagModel(categories: categories)
         }
         
-        private func handle(_ grouppedCategories: [Int: [Category]]?) {
+        private func handle(_ grouppedCategories: CategoriesByParent?) {
             grouppedCategories?
                 .sorted { $0.key < $1.key }
                 .forEach { parentId, categories in

@@ -9,11 +9,11 @@ import Combine
 import Foundation
 
 protocol GetGrouppedCategoriesInteractor: Interactor, CategoriesRepositoryProtocol {
-    func getGrouppedCategories(forceFresh: Bool, networkManager: NetworkManager) -> Future<[Int: [Category]]?, ApiError>
+    func getGrouppedCategories(forceFresh: Bool, networkManager: NetworkManager) -> Future<CategoriesByParent?, ApiError>
 }
 
 extension GetGrouppedCategoriesInteractor {
-    func getGrouppedCategories(forceFresh: Bool, networkManager: NetworkManager = NetworkManager()) -> Future<[Int: [Category]]?, ApiError> {
+    func getGrouppedCategories(forceFresh: Bool, networkManager: NetworkManager = NetworkManager()) -> Future<CategoriesByParent?, ApiError> {
         if forceFresh {
             return getFreshCategoriesGroupedByParent(networkManager: networkManager)
         }

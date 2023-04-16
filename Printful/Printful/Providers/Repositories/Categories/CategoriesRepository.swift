@@ -8,10 +8,16 @@
 import Combine
 import Foundation
 
+/**
+ This repository retrurns categories.
+ Reaching data is possible ony with protocols.
+ Be aware that data might be cached.
+ */
+
 protocol CategoriesRepositoryProtocol {
     func getCachedOrFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
     func getFreshCategories(networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
-    func getCachedOrFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<[Int: [Category]]?, ApiError>
+    func getCachedOrFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<CategoriesByParent?, ApiError>
 }
 
 extension CategoriesRepositoryProtocol where Self: Interactor {
@@ -25,16 +31,18 @@ extension CategoriesRepositoryProtocol where Self: Interactor {
         return categoriesRepo.get(mandatoryDownload: true)
     }
     
-    func getCachedOrFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<[Int: [Category]]?, ApiError> {
+    func getCachedOrFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<CategoriesByParent?, ApiError> {
         let categoriesRepo = CategoriesRepository(networkManager: networkManager)
         return categoriesRepo.getCategoriesGroupedByParent(mandatoryDownload: false)
     }
     
-    func getFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<[Int: [Category]]?, ApiError> {
+    func getFreshCategoriesGroupedByParent(networkManager: NetworkManager) -> Future<CategoriesByParent?, ApiError> {
         let categoriesRepo = CategoriesRepository(networkManager: networkManager)
         return categoriesRepo.getCategoriesGroupedByParent(mandatoryDownload: true)
     }
 }
+
+typealias CategoriesByParent = [Int: [Category]]
 
 class CategoriesRepository: Repository {
     
@@ -57,10 +65,6 @@ class CategoriesRepository: Repository {
             }
             
             if let local = localData {
-                /** If data are stored already show them immediately and update in background
-                 since these are not critcal time sensitive data
-                 */
-                
                 promise(.success(local))
                 self.updateInBackground()
             } else {
@@ -82,24 +86,18 @@ class CategoriesRepository: Repository {
             }
         }
     }
-    
-    #warning("Typalias success response")
-    
-    fileprivate func getCategoriesGroupedByParent(mandatoryDownload: Bool) -> Future<[Int: [Category]]?, ApiError> {
+
+    fileprivate func getCategoriesGroupedByParent(mandatoryDownload: Bool) -> Future<CategoriesByParent?, ApiError> {
         Future { promise in
             
             CategoriesStorage.deleteOutdated()
             
-            var localData: [Int: [Category]]? = nil
+            var localData: CategoriesByParent? = nil
             if !mandatoryDownload {
                 localData = CategoriesStorage.loadCategoriesGroupedByParentId()
             }
             
             if let local = localData {
-                /** If data are stored already show them immediately and update in background
-                 since these are not critcal time sensitive data
-                 */
-                
                 promise(.success(local))
                 self.updateInBackground()
             } else {

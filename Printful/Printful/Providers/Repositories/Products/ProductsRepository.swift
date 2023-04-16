@@ -8,6 +8,12 @@
 import Combine
 import Foundation
 
+/**
+ This repository retrurns data of products.
+ Reaching data is possible ony with protocols.
+ Be aware that data might be cached.
+ */
+
 protocol ProductsRepositoryProtocol {
     func getCachedOrFreshProducts(networkManager: NetworkManager) -> Future<[Product], ApiError>
     func getCachedOrFreshProducts(for category: Int, networkManager: NetworkManager) -> Future<[Product]?, ApiError>
@@ -69,10 +75,6 @@ class ProductsRepository: Repository {
         Future { promise in
 
             if let local = ProductsStorage.loadAll() {
-                /** If data are stored already show them immediately and update in background
-                 since these are not critcal time sensitive data
-                 */
-                
                 promise(.success(local))
                 self.updateInBackground()
             } else {
@@ -99,10 +101,6 @@ class ProductsRepository: Repository {
         Future { promise in
             
             if let local = ProductsStorage.load(for: category) {
-                /** If data are stored already show them immediately and update in background
-                 since these are not critcal time sensitive data
-                 */
-                
                 promise(.success(local))
                 self.updateInBackground()
             } else {
@@ -134,7 +132,6 @@ class ProductsRepository: Repository {
         ProductsStorage.updateFavorite(for: product, with: value)
     }
     
-    
     fileprivate func getProduct(by productId: Int) -> Future<Product?, ApiError> {
         Future { promise in
             
@@ -163,7 +160,6 @@ class ProductsRepository: Repository {
     
     
     fileprivate func updateInBackground() {
-        
         let successHandler: (ProductResponse) throws -> Void = { successResponse in
             DispatchQueue.main.async {
                 ProductsStorage.save(successResponse.result)
