@@ -8,22 +8,28 @@
 import Combine
 import Foundation
 
-protocol GetFavoritedProductsInteractor: Interactor, ProductsRepositoryProtocol {
-    func getFavoriteProducts(networkManager: NetworkManager) -> [Product]?
+protocol FavoriteProductsInteractor {
+    func getFavorites() -> [Product]?
+    func removeFavorite(for product: Product)
+    func addFavorite(for product: Product)
 }
 
-extension GetFavoritedProductsInteractor {
-    func getFavoriteProducts(networkManager: NetworkManager = NetworkManager()) -> [Product]? {
-        return getCachedFavorites(networkManager: networkManager)
+class FavoriteProductsInteractorImpementation: FavoriteProductsInteractor {
+    func getFavorites() -> [Product]? {
+        return repository.getFavorites()
     }
-}
-
-protocol RemoveFavoriteProductInteractor: Interactor, ProductsRepositoryProtocol {
-    func removeFavoriteProduct(for product: Product, networkManager: NetworkManager)
-}
-
-extension RemoveFavoriteProductInteractor {
-    func removeFavoriteProduct(for product: Product, networkManager: NetworkManager = NetworkManager()) {
-        return unsetFavorite(for: product, networkManager: networkManager)
+    
+    func removeFavorite(for product: Product) {
+        repository.setFavoriteStatus(product: product, value: false)
+    }
+    
+    func addFavorite(for product: Product) {
+        repository.setFavoriteStatus(product: product, value: true)
+    }
+    
+    private let repository: ProductsRepository
+    
+    init() {
+        self.repository = ProductsRepository(networkManager: NetworkManager())
     }
 }

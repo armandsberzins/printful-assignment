@@ -8,15 +8,18 @@
 import Combine
 import Foundation
 
-protocol GetCategoriesInteractor: Interactor, CategoriesRepositoryProtocol {
-    func getCategories(forceFresh: Bool, networkManager: NetworkManager) -> Future<CateogryResult, ApiError>
+protocol GetCategoriesInteractor {
+    func get(forceFresh: Bool) -> Future<CateogryResult, ApiError>
 }
 
-extension GetCategoriesInteractor {
-    func getCategories(forceFresh: Bool, networkManager: NetworkManager = NetworkManager()) -> Future<CateogryResult, ApiError> {
-        if forceFresh {
-            return getFreshCategories(networkManager: networkManager)
-        }
-        return getCachedOrFreshCategories(networkManager: networkManager)
+class GetCategoriesInteractorImpementation: GetCategoriesInteractor {
+    func get(forceFresh: Bool) -> Future<CateogryResult, ApiError> {
+        return repository.get(mandatoryDownload: forceFresh)
+    }
+    
+    private let repository: CategoriesRepository
+    
+    init() {
+        self.repository = CategoriesRepository(networkManager: NetworkManager())
     }
 }

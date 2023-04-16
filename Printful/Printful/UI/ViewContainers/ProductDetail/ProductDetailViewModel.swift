@@ -17,7 +17,9 @@ struct ProductDetailViewProperty {
 
 extension ProductDetailView {
     @MainActor
-    class ProductDetailViewModel: ObservableObject, GetProductInteractor {
+    class ProductDetailViewModel: ObservableObject {
+        
+        private let productInteractor: GetProductsInteractor
         
         let productId: Int
         
@@ -32,13 +34,14 @@ extension ProductDetailView {
         
         init(productId: Int) {
             self.productId = productId
+            self.productInteractor = GetProductsInteractorImpementation()
             loadProduct(productId)
         }
         
         private func loadProduct(_ productId: Int) {
             error = nil
             showLoading = true
-            cancelable = getProduct(by: productId)
+            cancelable = productInteractor.getBy(productId: productId)
                 .subscribe(on: Self.productQueue)
                 .receive(on: DispatchQueue.main)
                 .sink(

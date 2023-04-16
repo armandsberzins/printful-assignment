@@ -20,10 +20,7 @@ struct ProductsStorage {
     
     private static let kNilHolderInt = -999
     private static let kNilHolderString = "NULLNULL"
-    
-#warning("Protocolize this Cache")
-#warning("Limit who can use this Cache and what can use Cache")
-    
+ 
     //MARK: - create
     static func save(_ results: [Product]) {
         
@@ -51,7 +48,6 @@ struct ProductsStorage {
             
             do {
                 try coreDataManager.managedObjectContext.save()
-                //try coreDataManager.managedObjectContext.update()
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
             }
@@ -200,7 +196,6 @@ struct ProductsStorage {
         
         do {
             try coreDataManager.managedObjectContext.save()
-           // try coreDataManager.managedObjectContext.update()
         } catch {
             print("Error: Couldn't delete")
         }

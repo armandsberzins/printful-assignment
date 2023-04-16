@@ -8,15 +8,18 @@
 import Combine
 import Foundation
 
-protocol GetGrouppedCategoriesInteractor: Interactor, CategoriesRepositoryProtocol {
-    func getGrouppedCategories(forceFresh: Bool, networkManager: NetworkManager) -> Future<[Int: [Category]]?, ApiError>
+protocol GrouppedCategoriesInteractor {
+    func get(forceFresh: Bool) -> Future<CategoriesByParent?, ApiError>
 }
 
-extension GetGrouppedCategoriesInteractor {
-    func getGrouppedCategories(forceFresh: Bool, networkManager: NetworkManager = NetworkManager()) -> Future<[Int: [Category]]?, ApiError> {
-        if forceFresh {
-            return getFreshCategoriesGroupedByParent(networkManager: networkManager)
-        }
-        return getCachedOrFreshCategoriesGroupedByParent(networkManager: networkManager)
+class GrouppedCategoriesInteractorImpementation: GrouppedCategoriesInteractor {
+    func get(forceFresh: Bool) -> Future<CategoriesByParent?, ApiError> {
+        return repository.getCategoriesGroupedByParent(mandatoryDownload: forceFresh)
+    }
+    
+    private let repository: CategoriesRepository
+    
+    init() {
+        self.repository = CategoriesRepository(networkManager: NetworkManager())
     }
 }

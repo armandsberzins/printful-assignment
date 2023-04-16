@@ -7,12 +7,18 @@
 
 import Foundation
 
-protocol RefreshProductsCacheInteractor: Interactor, ProductsRepositoryProtocol {
-    func refreshProductsCache(networkManager: NetworkManager)
+protocol RefreshProductsCacheInteractor {
+    func updateCache()
 }
 
-extension RefreshProductsCacheInteractor {
-    func refreshProductsCache(networkManager: NetworkManager = NetworkManager()) {
-        return refreshProducts(networkManager: networkManager)
+class RefreshProductsCacheInteractorImpementation: RefreshProductsCacheInteractor {
+    func updateCache() {
+        return repository.updateInBackground()
+    }
+    
+    private let repository: ProductsRepository
+    
+    init() {
+        self.repository = ProductsRepository(networkManager: NetworkManager())
     }
 }
