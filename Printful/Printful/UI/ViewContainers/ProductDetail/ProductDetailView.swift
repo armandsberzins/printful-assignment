@@ -27,7 +27,7 @@ struct ProductDetailView: View {
                     if let title = viewModel.product?.title {
                         Text(verbatim: title)
                             .font(.system(.title, weight: .semibold))
-                            .foregroundColor(.black)
+                            .foregroundColor(.textColor)
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.horizontal, 8)

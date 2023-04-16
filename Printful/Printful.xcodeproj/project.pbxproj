@@ -37,6 +37,7 @@
 		FA5E48A029EB85B900ECE577 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E489F29EB85B900ECE577 /* FavoritesViewModel.swift */; };
 		FA5E48A429EB8EF400ECE577 /* ProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E48A329EB8EF400ECE577 /* ProductList.swift */; };
 		FA5E48A629EBAC8400ECE577 /* CacheAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E48A529EBAC8400ECE577 /* CacheAsyncImage.swift */; };
+		FA9D4D0429EC7A2600E20E24 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4D0329EC7A2600E20E24 /* Theme.swift */; };
 		FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */; };
 		FAD4665929D1FF7500EA3AFB /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665829D1FF7500EA3AFB /* CategoriesView.swift */; };
 		FAD4665B29D1FF7600EA3AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */; };
@@ -103,6 +104,7 @@
 		FA5E489F29EB85B900ECE577 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		FA5E48A329EB8EF400ECE577 /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
 		FA5E48A529EBAC8400ECE577 /* CacheAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAsyncImage.swift; sourceTree = "<group>"; };
+		FA9D4D0329EC7A2600E20E24 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		FAD4665329D1FF7500EA3AFB /* Printful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Printful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulApp.swift; sourceTree = "<group>"; };
 		FAD4665829D1FF7500EA3AFB /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			children = (
 				FAD4668B29D2413600EA3AFB /* RootView.swift */,
 				FAD4668D29D2415C00EA3AFB /* TabController.swift */,
+				FA9D4D0329EC7A2600E20E24 /* Theme.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				FAD4668C29D2413600EA3AFB /* RootView.swift in Sources */,
 				FA5E489D29EB6B6300ECE577 /* ProductImage.swift in Sources */,
 				FA5E488E29E9E5FF00ECE577 /* ProductRowView.swift in Sources */,
+				FA9D4D0429EC7A2600E20E24 /* Theme.swift in Sources */,
 				FA5E488329E8A5EB00ECE577 /* PrintfulErrorResponse.swift in Sources */,
 				FA5E485929E15CE100ECE577 /* Category.xcdatamodeld in Sources */,
 				FA5E485629E099C200ECE577 /* CategoryStorage.swift in Sources */,

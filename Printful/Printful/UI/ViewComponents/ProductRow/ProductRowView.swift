@@ -19,7 +19,7 @@ struct ProductRowView: View {
             if let title = model.product.title {
                 Text(verbatim: title)
                     .font(.system(.body, weight: .semibold))
-                    .foregroundColor(.black)
+                    .foregroundColor(.textColor)
                     .padding(4)
                 Spacer()
             }
@@ -34,7 +34,7 @@ struct ProductRowView: View {
                     
                 } else {
                     Image(systemName: "star")
-                        .foregroundColor(.black)
+                        .foregroundColor(.textColor)
                         .onTapGesture {
                             favoritingAction()
                         }
