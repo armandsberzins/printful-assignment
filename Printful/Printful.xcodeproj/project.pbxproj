@@ -36,6 +36,7 @@
 		FA5E489D29EB6B6300ECE577 /* ProductImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E489C29EB6B6300ECE577 /* ProductImage.swift */; };
 		FA5E48A029EB85B900ECE577 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E489F29EB85B900ECE577 /* FavoritesViewModel.swift */; };
 		FA5E48A429EB8EF400ECE577 /* ProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E48A329EB8EF400ECE577 /* ProductList.swift */; };
+		FA5E48A629EBAC8400ECE577 /* CacheAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5E48A529EBAC8400ECE577 /* CacheAsyncImage.swift */; };
 		FAD4665729D1FF7500EA3AFB /* PrintfulApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */; };
 		FAD4665929D1FF7500EA3AFB /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4665829D1FF7500EA3AFB /* CategoriesView.swift */; };
 		FAD4665B29D1FF7600EA3AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD4665A29D1FF7600EA3AFB /* Assets.xcassets */; };
@@ -101,6 +102,7 @@
 		FA5E489E29EB6F3B00ECE577 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA5E489F29EB85B900ECE577 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		FA5E48A329EB8EF400ECE577 /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
+		FA5E48A529EBAC8400ECE577 /* CacheAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAsyncImage.swift; sourceTree = "<group>"; };
 		FAD4665329D1FF7500EA3AFB /* Printful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Printful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD4665629D1FF7500EA3AFB /* PrintfulApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintfulApp.swift; sourceTree = "<group>"; };
 		FAD4665829D1FF7500EA3AFB /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				FA5E486129E2B3F800ECE577 /* readSize.swift */,
+				FA5E48A529EBAC8400ECE577 /* CacheAsyncImage.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				FAD4669529D245A800EA3AFB /* NetworkManager.swift in Sources */,
 				FA5E486C29E5F4BC00ECE577 /* ProductsRepository.swift in Sources */,
 				FAD466A029D2B8D600EA3AFB /* CoreDataManager.swift in Sources */,
+				FA5E48A629EBAC8400ECE577 /* CacheAsyncImage.swift in Sources */,
 				FA5E486E29E5F68900ECE577 /* ProductResponse.swift in Sources */,
 				FAD4669929D246E400EA3AFB /* ApiError.swift in Sources */,
 				FA5E488129E7B5A400ECE577 /* ProductsViewModel.swift in Sources */,
