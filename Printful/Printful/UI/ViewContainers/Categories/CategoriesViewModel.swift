@@ -45,11 +45,11 @@ extension CategoriesView {
                 .subscribe(on: Self.categoriesQueue)
                 .receive(on: DispatchQueue.main)
                 .sink(
-                    receiveCompletion: { completion in
-                        self.handle(completion)
+                    receiveCompletion: { [weak self] completion in
+                        self?.handle(completion)
                     },
-                    receiveValue: { categoriesByParentDic in
-                        self.handle(categoriesByParentDic)
+                    receiveValue: { [weak self] categoriesByParentDic in
+                        self?.handle(categoriesByParentDic)
                     }
                 )
         }

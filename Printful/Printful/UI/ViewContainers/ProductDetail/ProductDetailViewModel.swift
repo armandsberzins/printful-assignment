@@ -45,11 +45,11 @@ extension ProductDetailView {
                 .subscribe(on: Self.productQueue)
                 .receive(on: DispatchQueue.main)
                 .sink(
-                    receiveCompletion: { completion in
-                        self.handle(completion)
+                    receiveCompletion: { [weak self] completion in
+                        self?.handle(completion)
                     },
-                    receiveValue: {
-                        self.handle($0)
+                    receiveValue: { [weak self] product in
+                        self?.handle(product)
                     }
                 )
         }
